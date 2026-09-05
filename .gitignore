@@ -1,0 +1,68 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+venv/
+backend/venv/
+.venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+backend/__pycache__/
+backend/app/__pycache__/
+backend/app/**/__pycache__/
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Databases & local state
+*.sqlite3
+*.db
+backend/*.db
+playlist_manager.db
+backend/playlist_manager.db
+
+# Environment variables
+.env
+backend/.env
+frontend/.env
+*.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local
+
+# Build output
+frontend/dist/
+dist/
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Logs & temp files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.log
