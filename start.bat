@@ -95,8 +95,8 @@ echo   - Web App: http://localhost:5173
 echo ===================================================
 echo.
 
-if not exist "node_modules" (
-    echo [INFO] Node modules not found. Installing dependencies...
+if not exist "node_modules\vite" (
+    echo [INFO] Frontend dependencies not found or incomplete. Installing...
     call npm install
 )
 
