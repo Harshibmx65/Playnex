@@ -72,14 +72,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onCloseMobile }) => {
         <div className="flex items-center justify-between px-3 py-2.5 border-b border-slate-200 dark:border-white/[0.08]">
           {!isCollapsed ? (
             <div className="flex items-center justify-between w-full">
-              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500">
+              <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
                 Menu
               </span>
               <button
                 type="button"
                 onClick={toggleCollapse}
                 title="Collapse Sidebar"
-                className="p-1 rounded-lg text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.05] transition-all"
+                className="p-1 rounded-lg text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.08] transition-all"
               >
                 <PanelLeftClose className="w-4 h-4" />
               </button>
@@ -90,7 +90,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onCloseMobile }) => {
                 type="button"
                 onClick={toggleCollapse}
                 title="Expand Sidebar"
-                className="p-1 rounded-lg text-slate-500 hover:text-cyan-600 dark:text-slate-400 dark:hover:text-[#00e5ff] hover:bg-slate-100 dark:hover:bg-white/[0.05] transition-all"
+                className="p-1 rounded-lg text-slate-600 hover:text-cyan-600 dark:text-slate-300 dark:hover:text-[#00e5ff] hover:bg-slate-100 dark:hover:bg-white/[0.08] transition-all"
               >
                 <PanelLeftOpen className="w-4 h-4 text-cyan-600 dark:text-[#00e5ff]" />
               </button>
@@ -102,7 +102,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onCloseMobile }) => {
           {/* Main Navigation */}
           <div>
             {!isCollapsed && (
-              <div className="px-3 mb-2 text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500">
+              <div className="px-3 mb-2 text-[11px] font-mono font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
                 Navigation
               </div>
             )}
@@ -116,18 +116,18 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onCloseMobile }) => {
                     to={item.path}
                     onClick={onCloseMobile}
                     title={isCollapsed ? item.name : undefined}
-                    className={`flex items-center ${isCollapsed ? 'justify-center p-2.5' : 'justify-between px-3 py-2'} rounded-xl font-medium transition-all ${
+                    className={`flex items-center ${isCollapsed ? 'justify-center p-2.5' : 'justify-between px-3 py-2'} rounded-xl transition-all ${
                       isActive
-                        ? 'bg-cyan-50 dark:bg-[#00e5ff]/10 text-cyan-700 dark:text-[#00e5ff] font-bold border border-cyan-300 dark:border-[#00e5ff]/30 shadow-sm'
-                        : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.05]'
+                        ? 'bg-cyan-50 dark:bg-[#00e5ff]/15 text-cyan-800 dark:text-[#00e5ff] font-bold border border-cyan-300 dark:border-[#00e5ff]/40 shadow-sm'
+                        : 'text-slate-700 dark:text-slate-200 font-semibold hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.08]'
                     }`}
                   >
                     <div className="flex items-center gap-2.5">
-                      <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-cyan-600 dark:text-[#00e5ff]' : 'text-slate-400'}`} />
+                      <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-cyan-600 dark:text-[#00e5ff]' : 'text-slate-500 dark:text-slate-400'}`} />
                       {!isCollapsed && <span>{item.name}</span>}
                     </div>
                     {!isCollapsed && item.badge && (
-                      <span className="px-1.5 py-0.2 text-[9px] font-mono font-bold uppercase text-cyan-700 dark:text-[#00e5ff] bg-cyan-100 dark:bg-[#00e5ff]/10 rounded border border-cyan-200 dark:border-[#00e5ff]/20">
+                      <span className="px-1.5 py-0.5 text-[10px] font-mono font-bold uppercase text-cyan-800 dark:text-[#00e5ff] bg-cyan-100 dark:bg-[#00e5ff]/15 rounded border border-cyan-300 dark:border-[#00e5ff]/30">
                         {item.badge}
                       </span>
                     )}
@@ -141,10 +141,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onCloseMobile }) => {
           <div>
             {!isCollapsed && (
               <div className="flex items-center justify-between px-3 mb-2">
-                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500">
+                <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
                   Active Courses
                 </span>
-                <span className="text-[10px] font-mono text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-[#0c1426] px-1.5 py-0.5 rounded border border-slate-200 dark:border-white/[0.08]">
+                <span className="text-[11px] font-mono font-bold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-[#0c1426] px-2 py-0.5 rounded border border-slate-300 dark:border-white/[0.12]">
                   {playlists.length}
                 </span>
               </div>
@@ -153,7 +153,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onCloseMobile }) => {
             <div className="space-y-1 max-h-72 overflow-y-auto pr-1">
               {playlists.length === 0 ? (
                 !isCollapsed && (
-                  <div className="px-3 py-4 text-xs text-slate-500 italic text-center font-mono">
+                  <div className="px-3 py-4 text-xs text-slate-600 dark:text-slate-400 italic text-center font-mono">
                     No courses imported.
                   </div>
                 )
@@ -168,18 +168,18 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onCloseMobile }) => {
                       title={isCollapsed ? pl.title : undefined}
                       className={`group flex items-center ${isCollapsed ? 'justify-center p-2.5' : 'items-start gap-2.5 px-3 py-2'} rounded-xl text-xs transition-all ${
                         isActive
-                          ? 'bg-cyan-50 dark:bg-[#00e5ff]/10 text-slate-900 dark:text-white font-medium border border-cyan-300 dark:border-[#00e5ff]/30'
-                          : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.05]'
+                          ? 'bg-cyan-50 dark:bg-[#00e5ff]/15 text-slate-950 dark:text-white font-bold border border-cyan-300 dark:border-[#00e5ff]/40'
+                          : 'text-slate-700 dark:text-slate-200 font-medium hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.08]'
                       }`}
                     >
-                      <ListVideo className={`w-4 h-4 shrink-0 ${isActive ? 'text-cyan-600 dark:text-[#00e5ff]' : 'text-slate-400 dark:text-slate-500 group-hover:text-slate-700 dark:group-hover:text-slate-300'} ${!isCollapsed ? 'mt-0.5' : ''}`} />
+                      <ListVideo className={`w-4 h-4 shrink-0 ${isActive ? 'text-cyan-600 dark:text-[#00e5ff]' : 'text-slate-500 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:text-slate-200'} ${!isCollapsed ? 'mt-0.5' : ''}`} />
                       {!isCollapsed && (
                         <div className="flex-1 min-w-0">
                           <p className="truncate font-semibold">{pl.title}</p>
-                          <div className="flex items-center gap-2 mt-0.5 text-[10px] font-mono text-slate-500">
+                          <div className="flex items-center gap-2 mt-0.5 text-[11px] font-mono text-slate-600 dark:text-slate-300 font-medium">
                             <span>{pl.completed_videos}/{pl.total_videos} done</span>
                             <span>•</span>
-                            <span className="text-cyan-600 dark:text-[#00e5ff]">{Math.round(pl.progress_percentage)}%</span>
+                            <span className="text-cyan-700 dark:text-[#00e5ff] font-bold">{Math.round(pl.progress_percentage)}%</span>
                           </div>
                         </div>
                       )}

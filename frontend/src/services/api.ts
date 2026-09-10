@@ -2,7 +2,6 @@ import axios from 'axios';
 import {
   AuthResponse,
   User,
-  OtpResponse,
   PlaylistSummary,
   PlaylistDetail,
   VideoDetail,
@@ -14,7 +13,7 @@ import {
   GlobalDashboardStats
 } from '../types';
 
-const API_BASE = '/api';
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '/api';
 
 export const api = axios.create({
   baseURL: API_BASE,
@@ -53,18 +52,6 @@ export const authApi = {
     const res = await api.post<AuthResponse>('/auth/login', { email, password });
     return res.data;
   },
-  sendRegisterOtp: async (name: string, email: string, password: string): Promise<OtpResponse> => {
-    const res = await api.post<OtpResponse>('/auth/register/send-otp', { name, email, password });
-    return res.data;
-  },
-  verifyRegisterOtp: async (email: string, otpCode: string): Promise<AuthResponse> => {
-    const res = await api.post<AuthResponse>('/auth/register/verify-otp', { email, otp_code: otpCode });
-    return res.data;
-  },
-  resendRegisterOtp: async (email: string): Promise<OtpResponse> => {
-    const res = await api.post<OtpResponse>('/auth/register/resend-otp', { email });
-    return res.data;
-  },
   guestLogin: async (): Promise<AuthResponse> => {
     const res = await api.post<AuthResponse>('/auth/guest-login');
     return res.data;
@@ -78,6 +65,7 @@ export const authApi = {
     return res.data;
   },
 };
+
 
 
 // Playlists API

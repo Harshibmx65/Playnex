@@ -1,4 +1,3 @@
-import random
 import uuid
 from datetime import datetime, timezone, timedelta
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -8,7 +7,6 @@ from app.core.config import settings
 from app.core.security import verify_password, get_password_hash, create_access_token
 from app.core.deps import get_current_user
 from app.models.user import User
-from app.models.otp import OtpVerification
 from app.models.tag import Tag, VideoTag
 from app.models.playlist import Playlist
 from app.models.video import Video
@@ -16,22 +14,17 @@ from app.models.progress import UserVideoProgress
 from app.models.note import Note
 from app.models.doubt import Doubt
 from app.models.revision import Revision
-from app.services.email import send_verification_otp
 from app.schemas.auth import (
     UserRegister,
     UserLogin,
     Token,
-    UserOut,
-    SendOtpRequest,
-    VerifyOtpRequest,
-    ResendOtpRequest,
-    OtpResponse
+    UserOut
 )
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
 def seed_user_initial_data(db: Session, user: User, is_guest: bool = False):
-    """Seed standard tags and starter demo playlist for newly verified users and guests"""
+    """Seed standard tags and starter demo playlist for newly registered users and guests"""
     # Standard tags
     tags_data = [
         ("Important", "rose"),
@@ -127,212 +120,40 @@ def seed_user_initial_data(db: Session, user: User, is_guest: bool = False):
     ))
 
 
-@router.post("/register/send-otp", response_model=OtpResponse)
-async def send_register_otp(user_in: SendOtpRequest, db: Session = Depends(get_db)):
-    email_clean = user_in.email.strip().lower()
+@router.post("/register", response_model=Token)
+def register(user_in: UserRegister, db: Session = Depends(get_db)):
+    """
+    Registers a new user with strong password validation.
+    Password must have length >= 8, min 1 uppercase, min 1 lowercase, min 1 special character.
+    """
+    email_clean = str(user_in.email).strip().lower()
+    name_clean = user_in.name.strip()
 
-    # Check if active verified user already exists
-    existing_user = db.query(User).filter(
-        User.email == email_clean,
-        User.is_verified == True,
-        User.is_guest == False
-    ).first()
-    if existing_user:
+    # Check if a non-guest registered user already exists with this email
+    existing_user = db.query(User).filter(User.email == email_clean).first()
+    if existing_user and not existing_user.is_guest:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="An account with this email address already exists. Please sign in."
         )
 
-    # Cooldown check: Check if an OTP was sent to this email in the last 60 seconds
-    now = datetime.now(timezone.utc)
-    recent_otp = db.query(OtpVerification).filter(
-        OtpVerification.email == email_clean,
-        OtpVerification.is_used == False,
-        OtpVerification.created_at > (now - timedelta(seconds=settings.OTP_RESEND_COOLDOWN_SECONDS))
-    ).first()
+    # Hash password securely with bcrypt
+    hashed_pwd = get_password_hash(user_in.password)
 
-    if recent_otp:
-        time_elapsed = int((now - recent_otp.created_at.replace(tzinfo=timezone.utc)).total_seconds())
-        remaining = max(1, settings.OTP_RESEND_COOLDOWN_SECONDS - time_elapsed)
-        raise HTTPException(
-            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
-            detail=f"Please wait {remaining} seconds before requesting a new verification code."
-        )
-
-    # Invalidate previous unused OTPs for this email
-    db.query(OtpVerification).filter(
-        OtpVerification.email == email_clean,
-        OtpVerification.is_used == False
-    ).update({"is_used": True})
-    db.commit()
-
-    # Generate 6-digit numeric OTP
-    otp_code = f"{random.randint(100000, 999999)}"
-    expires_at = now + timedelta(minutes=settings.OTP_EXPIRE_MINUTES)
-    password_hash = get_password_hash(user_in.password)
-
-    new_otp = OtpVerification(
-        email=email_clean,
-        otp_code=otp_code,
-        name=user_in.name.strip(),
-        password_hash=password_hash,
-        purpose="REGISTER",
-        attempts=0,
-        is_used=False,
-        expires_at=expires_at,
-        created_at=now
-    )
-    db.add(new_otp)
-    db.commit()
-
-    # Send OTP Email
-    dispatch_result = await send_verification_otp(email_clean, user_in.name.strip(), otp_code)
-    delivery_mode = dispatch_result.get("method")
-    dev_otp = otp_code if delivery_mode in ("console_dev", "console_fallback") else None
-
-    return {
-        "message": f"Verification code sent to {email_clean}",
-        "email": email_clean,
-        "cooldown_seconds": settings.OTP_RESEND_COOLDOWN_SECONDS,
-        "expires_in_seconds": settings.OTP_EXPIRE_MINUTES * 60,
-        "delivery_mode": delivery_mode,
-        "dev_otp": dev_otp
-    }
-
-
-@router.post("/register/resend-otp", response_model=OtpResponse)
-async def resend_register_otp(req: ResendOtpRequest, db: Session = Depends(get_db)):
-    email_clean = req.email.strip().lower()
-
-    # Find the most recent registration OTP request for this email
-    latest_otp = db.query(OtpVerification).filter(
-        OtpVerification.email == email_clean,
-        OtpVerification.purpose == "REGISTER"
-    ).order_by(OtpVerification.created_at.desc()).first()
-
-    if not latest_otp or not latest_otp.name:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="No pending registration found for this email. Please sign up again."
-        )
-
-    # Check cooldown
-    now = datetime.now(timezone.utc)
-    created_at_utc = latest_otp.created_at.replace(tzinfo=timezone.utc) if latest_otp.created_at.tzinfo is None else latest_otp.created_at
-    time_elapsed = int((now - created_at_utc).total_seconds())
-
-    if time_elapsed < settings.OTP_RESEND_COOLDOWN_SECONDS:
-        remaining = settings.OTP_RESEND_COOLDOWN_SECONDS - time_elapsed
-        raise HTTPException(
-            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
-            detail=f"Please wait {remaining} seconds before requesting a new code."
-        )
-
-    # Invalidate all prior codes
-    db.query(OtpVerification).filter(
-        OtpVerification.email == email_clean,
-        OtpVerification.is_used == False
-    ).update({"is_used": True})
-    db.commit()
-
-    # Generate new code keeping name and password_hash
-    otp_code = f"{random.randint(100000, 999999)}"
-    expires_at = now + timedelta(minutes=settings.OTP_EXPIRE_MINUTES)
-
-    new_otp = OtpVerification(
-        email=email_clean,
-        otp_code=otp_code,
-        name=latest_otp.name,
-        password_hash=latest_otp.password_hash,
-        purpose="REGISTER",
-        attempts=0,
-        is_used=False,
-        expires_at=expires_at,
-        created_at=now
-    )
-    db.add(new_otp)
-    db.commit()
-
-    dispatch_result = await send_verification_otp(email_clean, latest_otp.name, otp_code)
-    delivery_mode = dispatch_result.get("method")
-    dev_otp = otp_code if delivery_mode in ("console_dev", "console_fallback") else None
-
-    return {
-        "message": f"A new verification code was sent to {email_clean}",
-        "email": email_clean,
-        "cooldown_seconds": settings.OTP_RESEND_COOLDOWN_SECONDS,
-        "expires_in_seconds": settings.OTP_EXPIRE_MINUTES * 60,
-        "delivery_mode": delivery_mode,
-        "dev_otp": dev_otp
-    }
-
-
-@router.post("/register/verify-otp", response_model=Token)
-def verify_register_otp(req: VerifyOtpRequest, db: Session = Depends(get_db)):
-    email_clean = req.email.strip().lower()
-    entered_code = req.otp_code.strip()
-
-    # Find active OTP record
-    otp_record = db.query(OtpVerification).filter(
-        OtpVerification.email == email_clean,
-        OtpVerification.purpose == "REGISTER",
-        OtpVerification.is_used == False
-    ).order_by(OtpVerification.created_at.desc()).first()
-
-    if not otp_record:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="No active verification code found for this email. Please request a new code."
-        )
-
-    # Check expiration
-    now = datetime.now(timezone.utc)
-    expires_at_utc = otp_record.expires_at.replace(tzinfo=timezone.utc) if otp_record.expires_at.tzinfo is None else otp_record.expires_at
-
-    if now > expires_at_utc:
-        otp_record.is_used = True
-        db.commit()
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Verification code has expired. Please click 'Resend Code' to receive a new one."
-        )
-
-    # Brute-force protection: max 5 attempts
-    if otp_record.attempts >= 5:
-        otp_record.is_used = True
-        db.commit()
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Too many incorrect attempts. For security, please request a new verification code."
-        )
-
-    # Verify code
-    if otp_record.otp_code != entered_code:
-        otp_record.attempts += 1
-        remaining_attempts = 5 - otp_record.attempts
-        db.commit()
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Invalid verification code. {remaining_attempts} attempt{'s' if remaining_attempts != 1 else ''} remaining."
-        )
-
-    # Mark OTP as successfully used
-    otp_record.is_used = True
-
-    # Check if user record already exists (e.g., re-verifying or previous guest conversion)
-    user = db.query(User).filter(User.email == email_clean).first()
-    if user:
-        user.name = otp_record.name or user.name
-        user.password_hash = otp_record.password_hash or user.password_hash
-        user.is_verified = True
-        user.is_guest = False
-        user.avatar = user.avatar or f"https://api.dicebear.com/7.x/bottts/svg?seed={user.name}"
+    if existing_user and existing_user.is_guest:
+        # Upgrade guest to a permanent registered account
+        existing_user.name = name_clean
+        existing_user.password_hash = hashed_pwd
+        existing_user.is_verified = True
+        existing_user.is_guest = False
+        existing_user.avatar = existing_user.avatar or f"https://api.dicebear.com/7.x/bottts/svg?seed={name_clean}"
+        user = existing_user
     else:
         user = User(
-            name=otp_record.name,
+            name=name_clean,
             email=email_clean,
-            password_hash=otp_record.password_hash,
-            avatar=f"https://api.dicebear.com/7.x/bottts/svg?seed={otp_record.name}",
+            password_hash=hashed_pwd,
+            avatar=f"https://api.dicebear.com/7.x/bottts/svg?seed={name_clean}",
             is_verified=True,
             is_guest=False
         )
@@ -352,20 +173,43 @@ def verify_register_otp(req: VerifyOtpRequest, db: Session = Depends(get_db)):
     }
 
 
+@router.post("/login", response_model=Token)
+def login(user_in: UserLogin, db: Session = Depends(get_db)):
+    """
+    Authenticates a user with email and password.
+    Returns JWT access token upon successful credentials verification.
+    """
+    email_clean = str(user_in.email).strip().lower()
+    user = db.query(User).filter(User.email == email_clean).first()
+
+    if not user or not verify_password(user_in.password, user.password_hash):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect email or password"
+        )
+
+    token = create_access_token(subject=user.id)
+    return {
+        "access_token": token,
+        "token_type": "bearer",
+        "user": user
+    }
+
+
 @router.post("/guest-login", response_model=Token)
 def guest_login(db: Session = Depends(get_db)):
     """
-    Creates an isolated temporary guest session.
-    Guest can explore all playlist, note, doubt, and revision features.
+    Creates an isolated temporary guest session with starter playlist and sandbox environment.
     """
     guest_uuid = uuid.uuid4().hex[:8]
     guest_email = f"guest_{guest_uuid}@guest.playnex.local"
     guest_name = f"Guest Learner #{guest_uuid[:4].upper()}"
 
+    # Generate a cryptographically secure random password for guest account
     guest_user = User(
         name=guest_name,
         email=guest_email,
-        password_hash=get_password_hash(uuid.uuid4().hex),
+        password_hash=get_password_hash(f"GuestPass_{uuid.uuid4().hex[:12]}!"),
         avatar=f"https://api.dicebear.com/7.x/bottts/svg?seed={guest_uuid}",
         is_verified=True,
         is_guest=True
@@ -391,65 +235,9 @@ def guest_login(db: Session = Depends(get_db)):
     }
 
 
-# Legacy direct register fallback (kept for backward compatibility or direct API)
-@router.post("/register", response_model=Token)
-def register(user_in: UserRegister, db: Session = Depends(get_db)):
-    email_clean = user_in.email.strip().lower()
-    user = db.query(User).filter(User.email == email_clean).first()
-    if user and user.is_verified and not user.is_guest:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="A user with this email already exists"
-        )
-    
-    new_user = User(
-        name=user_in.name,
-        email=email_clean,
-        password_hash=get_password_hash(user_in.password),
-        avatar=f"https://api.dicebear.com/7.x/bottts/svg?seed={user_in.name}",
-        is_verified=True,
-        is_guest=False
-    )
-    db.add(new_user)
-    db.flush()
-    seed_user_initial_data(db, new_user, is_guest=False)
-    db.commit()
-    db.refresh(new_user)
-
-    token = create_access_token(subject=new_user.id)
-    return {
-        "access_token": token,
-        "token_type": "bearer",
-        "user": new_user
-    }
-
-
-@router.post("/login", response_model=Token)
-def login(user_in: UserLogin, db: Session = Depends(get_db)):
-    email_clean = user_in.email.strip().lower()
-    user = db.query(User).filter(User.email == email_clean).first()
-    
-    if not user or not verify_password(user_in.password, user.password_hash):
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect email or password"
-        )
-    
-    if not user.is_verified and not user.is_guest:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Your email is not verified yet. Please complete email verification to sign in."
-        )
-    
-    token = create_access_token(subject=user.id)
-    return {
-        "access_token": token,
-        "token_type": "bearer",
-        "user": user
-    }
-
-
 @router.get("/me", response_model=UserOut)
 def get_me(current_user: User = Depends(get_current_user)):
+    """Returns the authenticated user's profile information"""
     return current_user
+
 

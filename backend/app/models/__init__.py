@@ -7,7 +7,6 @@ from app.models.tag import Tag, VideoTag
 from app.models.note import Note
 from app.models.doubt import Doubt
 from app.models.revision import Revision
-from app.models.otp import OtpVerification
 
 __all__ = [
     "Base",
@@ -19,7 +18,7 @@ __all__ = [
     "VideoTag",
     "Note",
     "Doubt",
-    "Revision",
-    "OtpVerification"
+    "Revision"
 ]
+
 

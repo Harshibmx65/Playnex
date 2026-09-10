@@ -134,7 +134,7 @@ export const TagsManager: React.FC<TagsManagerProps> = ({
 
           {/* Color Chooser */}
           <div className="flex items-center gap-2 pt-1">
-            <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400">Color:</span>
+            <span className="text-xs font-mono font-bold text-slate-800 dark:text-slate-200">Color:</span>
             <div className="flex items-center gap-1.5">
               {colors.map((c) => (
                 <button
@@ -154,7 +154,7 @@ export const TagsManager: React.FC<TagsManagerProps> = ({
             <button
               type="button"
               onClick={() => setIsCreating(false)}
-              className="px-2.5 py-1 text-xs font-mono text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+              className="px-2.5 py-1 text-xs font-mono font-bold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
             >
               Cancel
             </button>
@@ -172,10 +172,10 @@ export const TagsManager: React.FC<TagsManagerProps> = ({
       {/* Tags List */}
       <div className="flex-1 overflow-y-auto space-y-2 pr-1">
         {allTags.length === 0 ? (
-          <div className="py-10 text-center rounded-2xl border border-dashed border-slate-200 dark:border-white/[0.08] p-6 space-y-2">
+          <div className="py-10 text-center rounded-2xl border border-dashed border-slate-300 dark:border-white/[0.08] p-6 space-y-2">
             <TagIcon className="w-8 h-8 text-slate-400 dark:text-slate-600 mx-auto" />
-            <p className="text-xs text-slate-600 dark:text-slate-400 font-medium">No custom tags created</p>
-            <p className="text-[11px] text-slate-500">
+            <p className="text-xs text-slate-900 dark:text-slate-100 font-bold">No custom tags created</p>
+            <p className="text-xs text-slate-700 dark:text-slate-300 font-medium">
               Create tags to categorize and filter lessons across all your courses.
             </p>
           </div>
@@ -192,7 +192,7 @@ export const TagsManager: React.FC<TagsManagerProps> = ({
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-mono text-xs font-bold transition-all border ${
                     isAssigned
                       ? `${colorClasses.bg} ${colorClasses.text} ${colorClasses.border} shadow-sm scale-105`
-                      : 'bg-white dark:bg-[#0c1426] text-slate-500 dark:text-slate-400 border-slate-200 dark:border-white/[0.08] hover:border-slate-300 dark:hover:border-white/20'
+                      : 'bg-white dark:bg-[#0c1426] text-slate-800 dark:text-slate-200 border-slate-300 dark:border-white/10 hover:border-slate-400 dark:hover:border-white/25'
                   }`}
                 >
                   <span className="w-2 h-2 rounded-full bg-current" />

@@ -79,11 +79,11 @@ export const ImportPlaylistModal: React.FC<ImportPlaylistModalProps> = ({
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-mono font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-2">
+            <label className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200 mb-2">
               YouTube Playlist URL or ID
             </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
                 <Link2 className="w-4 h-4" />
               </div>
               <input
@@ -94,18 +94,18 @@ export const ImportPlaylistModal: React.FC<ImportPlaylistModalProps> = ({
                   setError(null);
                 }}
                 placeholder="https://www.youtube.com/playlist?list=PL..."
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-[#070b14] border border-slate-300 dark:border-white/[0.08] rounded-xl text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-cyan-500 focus:border-cyan-500"
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-[#070b14] border-2 border-slate-300 dark:border-white/[0.08] rounded-xl text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-cyan-500"
                 autoFocus
               />
             </div>
-            <p className="mt-1.5 text-[11px] text-slate-500 font-mono">
+            <p className="mt-1.5 text-xs text-slate-600 dark:text-slate-400 font-mono font-medium">
               Supports standard playlists, watch URLs with list ID, or raw IDs.
             </p>
           </div>
 
           {/* Error Message */}
           {error && (
-            <div className="flex items-center gap-2 p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-600 dark:text-rose-400 text-xs font-mono">
+            <div className="flex items-center gap-2 p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-600 dark:text-rose-400 text-xs font-mono font-bold">
               <AlertCircle className="w-4 h-4 shrink-0" />
               <span>{error}</span>
             </div>
@@ -113,7 +113,7 @@ export const ImportPlaylistModal: React.FC<ImportPlaylistModalProps> = ({
 
           {/* Preset Examples */}
           <div className="pt-2">
-            <div className="flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-400 mb-2 font-mono">
+            <div className="flex items-center gap-1.5 text-xs text-slate-800 dark:text-slate-200 mb-2 font-mono font-bold">
               <Sparkles className="w-3.5 h-3.5 text-cyan-600 dark:text-[#00e5ff]" />
               <span>Try a demo playlist:</span>
             </div>
@@ -123,7 +123,7 @@ export const ImportPlaylistModal: React.FC<ImportPlaylistModalProps> = ({
                   key={i}
                   type="button"
                   onClick={() => setUrl(sample.url)}
-                  className="px-2.5 py-1 text-xs font-mono bg-slate-100 dark:bg-[#070b14] hover:bg-slate-200 dark:hover:bg-white/[0.05] text-slate-700 dark:text-slate-300 rounded-lg border border-slate-200 dark:border-white/[0.08] hover:border-cyan-500/40 transition-colors"
+                  className="px-2.5 py-1 text-xs font-mono font-bold bg-slate-100 dark:bg-[#070b14] hover:bg-slate-200 dark:hover:bg-white/[0.05] text-slate-800 dark:text-slate-200 rounded-lg border border-slate-300 dark:border-white/15 hover:border-cyan-500/50 transition-colors shadow-xs"
                 >
                   {sample.title}
                 </button>
@@ -132,11 +132,11 @@ export const ImportPlaylistModal: React.FC<ImportPlaylistModalProps> = ({
           </div>
 
           {/* Actions */}
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100 dark:border-white/[0.08]">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-200 dark:border-white/[0.08]">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white rounded-lg transition-colors font-mono"
+              className="px-4 py-2 text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white rounded-lg transition-colors font-mono"
             >
               Cancel
             </button>

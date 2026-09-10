@@ -1,35 +1,29 @@
-from pydantic import BaseModel, Field
+import re
+from pydantic import BaseModel, Field, field_validator, EmailStr
 from typing import Optional
 from datetime import datetime
 
-class SendOtpRequest(BaseModel):
-    name: str = Field(..., min_length=2, max_length=100)
-    email: str = Field(..., min_length=3, max_length=255)
-    password: str = Field(..., min_length=6, max_length=100)
-
-class VerifyOtpRequest(BaseModel):
-    email: str = Field(..., min_length=3, max_length=255)
-    otp_code: str = Field(..., min_length=4, max_length=10)
-
-class ResendOtpRequest(BaseModel):
-    email: str = Field(..., min_length=3, max_length=255)
-
-class OtpResponse(BaseModel):
-    message: str
-    email: str
-    cooldown_seconds: int = 60
-    expires_in_seconds: int = 600
-    delivery_mode: Optional[str] = None
-    dev_otp: Optional[str] = None
-
 class UserRegister(BaseModel):
     name: str = Field(..., min_length=2, max_length=100)
-    email: str = Field(..., min_length=3, max_length=255)
-    password: str = Field(..., min_length=6, max_length=100)
+    email: EmailStr = Field(..., max_length=255)
+    password: str = Field(..., min_length=8, max_length=128)
+
+    @field_validator("password")
+    @classmethod
+    def validate_password_strength(cls, v: str) -> str:
+        if len(v) < 8:
+            raise ValueError("Password must be at least 8 characters long")
+        if not re.search(r"[A-Z]", v):
+            raise ValueError("Password must contain at least one uppercase letter (A-Z)")
+        if not re.search(r"[a-z]", v):
+            raise ValueError("Password must contain at least one lowercase letter (a-z)")
+        if not re.search(r"[!@#$%^&*(),.?\":{}|<>\-_=+[\]\\/;'`~]", v):
+            raise ValueError("Password must contain at least one special character (!@#$%^&*...)")
+        return v
 
 class UserLogin(BaseModel):
-    email: str = Field(..., min_length=3, max_length=255)
-    password: str = Field(..., min_length=1, max_length=100)
+    email: EmailStr = Field(..., max_length=255)
+    password: str = Field(..., min_length=1, max_length=128)
 
 class UserOut(BaseModel):
     id: int
@@ -52,3 +46,4 @@ class TokenPayload(BaseModel):
     sub: Optional[str] = None
     exp: Optional[int] = None
     is_guest: Optional[bool] = False
+

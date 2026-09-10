@@ -9,7 +9,6 @@ from app.api import api_router
 # Initialize DB tables & schema migrations
 init_db()
 
-
 app = FastAPI(
     title=settings.PROJECT_NAME,
     description="YouTube Playlist Player + Learning Progress Tracker + Revision/Doubt Management Platform",
@@ -19,10 +18,22 @@ app = FastAPI(
     openapi_url="/api/openapi.json"
 )
 
+# Security Headers Middleware
+@app.middleware("http")
+async def add_security_headers(request: Request, call_next):
+    response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "SAMEORIGIN"
+    response.headers["X-XSS-Protection"] = "1; mode=block"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()"
+    return response
+
 # CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.CORS_ORIGINS,
+    allow_origins=settings.CORS_ORIGINS if "*" not in settings.CORS_ORIGINS else ["*"],
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -41,3 +52,4 @@ def root():
 @app.get("/api/health")
 def health_check():
     return {"status": "healthy"}
+

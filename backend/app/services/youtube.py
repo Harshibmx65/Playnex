@@ -43,14 +43,27 @@ def parse_iso8601_duration(duration_str: Optional[str]) -> int:
 
 def extract_playlist_id(url_or_id: str) -> Optional[str]:
     url_or_id = url_or_id.strip()
+    
     # Matches list=PL... or list=UU... or list=OLAK...
     match = re.search(r"[?&]list=([a-zA-Z0-9_-]+)", url_or_id)
     if match:
         return match.group(1)
     
-    # Direct playlist ID
+    # Direct playlist ID token
     if re.match(r"^(PL|UU|FL|RD|OLAK)[a-zA-Z0-9_-]+$", url_or_id):
         return url_or_id
+
+    # If it is a full URL, ensure domain is strictly YouTube
+    if url_or_id.startswith(("http://", "https://")):
+        from urllib.parse import urlparse
+        parsed = urlparse(url_or_id)
+        valid_hosts = ("youtube.com", "www.youtube.com", "m.youtube.com", "music.youtube.com", "youtu.be")
+        if parsed.hostname not in valid_hosts:
+            return None
+        # Check query again or path
+        list_param = re.search(r"[?&]list=([a-zA-Z0-9_-]+)", parsed.query)
+        if list_param:
+            return list_param.group(1)
         
     return None
 
@@ -59,8 +72,7 @@ class YouTubeService:
     async def fetch_playlist(url_or_id: str) -> Dict[str, Any]:
         playlist_id = extract_playlist_id(url_or_id)
         if not playlist_id:
-            # If it's a general URL, try passing directly to yt_dlp
-            playlist_id = url_or_id.strip()
+            raise ValueError("Invalid YouTube playlist URL or ID. Please provide a valid YouTube playlist link.")
 
         # Strategy 1: Use YouTube Data API v3 if API key is provided
         if settings.YOUTUBE_API_KEY:
@@ -87,12 +99,10 @@ class YouTubeService:
     def _fetch_via_ytdlp(playlist_id: str) -> Dict[str, Any]:
         import yt_dlp
 
-        if not playlist_id.startswith("http"):
-            url = f"https://www.youtube.com/playlist?list={playlist_id}"
-        else:
-            url = playlist_id
+        url = f"https://www.youtube.com/playlist?list={playlist_id}"
 
         ydl_opts = {
+
             'extract_flat': 'in_playlist',
             'skip_download': True,
             'quiet': True,

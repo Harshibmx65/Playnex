@@ -226,8 +226,8 @@ export const NotesPanel: React.FC<NotesPanelProps> = ({
         ) : notes.length === 0 ? (
           <div className="py-10 text-center rounded-2xl border-2 border-dashed border-slate-300 dark:border-white/[0.08] p-6 space-y-2 bg-slate-50/50 dark:bg-transparent">
             <BookOpen className="w-8 h-8 text-slate-400 dark:text-slate-600 mx-auto" />
-            <p className="text-xs text-slate-700 dark:text-slate-300 font-bold">No notes for this video yet</p>
-            <p className="text-[11px] text-slate-500 max-w-xs mx-auto">
+            <p className="text-xs text-slate-900 dark:text-slate-100 font-bold">No notes for this video yet</p>
+            <p className="text-xs text-slate-700 dark:text-slate-300 font-medium max-w-xs mx-auto">
               Click the "Note @ 00:00" button under the video or "+ Add Note" to capture insights with frame timestamps.
             </p>
           </div>
@@ -254,7 +254,7 @@ export const NotesPanel: React.FC<NotesPanelProps> = ({
                   <div className="flex items-center justify-end gap-2">
                     <button
                       onClick={() => setEditingNoteId(null)}
-                      className="px-2.5 py-1 text-xs text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                      className="px-2.5 py-1 text-xs text-slate-700 dark:text-slate-300 font-bold hover:text-slate-900 dark:hover:text-white"
                     >
                       Cancel
                     </button>
@@ -272,10 +272,10 @@ export const NotesPanel: React.FC<NotesPanelProps> = ({
                     {/* Clickable timestamp chip that seeks player */}
                     <button
                       onClick={() => onSeek(note.timestamp)}
-                      className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-cyan-100 dark:bg-[#00e5ff]/10 text-cyan-900 dark:text-[#00e5ff] hover:bg-cyan-200 dark:hover:bg-[#00e5ff]/20 border border-cyan-300 dark:border-[#00e5ff]/30 text-xs font-mono font-bold transition-colors"
+                      className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-cyan-100 dark:bg-[#00e5ff]/10 text-cyan-950 dark:text-[#00e5ff] hover:bg-cyan-200 dark:hover:bg-[#00e5ff]/20 border border-cyan-300 dark:border-[#00e5ff]/30 text-xs font-mono font-bold transition-colors"
                       title="Jump to video timestamp"
                     >
-                      <Clock className="w-3 h-3 text-cyan-700 dark:text-[#00e5ff]" />
+                      <Clock className="w-3.5 h-3.5 text-cyan-700 dark:text-[#00e5ff]" />
                       <span>{note.timestamp_formatted || formatSeconds(note.timestamp)}</span>
                     </button>
 
@@ -283,14 +283,14 @@ export const NotesPanel: React.FC<NotesPanelProps> = ({
                     <div className="flex items-center gap-1 opacity-80 group-hover:opacity-100 transition-opacity">
                       <button
                         onClick={() => handleStartEdit(note)}
-                        className="p-1.5 rounded text-slate-500 hover:text-cyan-700 dark:hover:text-[#00e5ff] hover:bg-slate-200/60 dark:hover:bg-white/[0.05]"
+                        className="p-1.5 rounded text-slate-600 dark:text-slate-300 hover:text-cyan-700 dark:hover:text-[#00e5ff] hover:bg-slate-200/60 dark:hover:bg-white/[0.05]"
                         title="Edit note"
                       >
                         <Edit3 className="w-3.5 h-3.5" />
                       </button>
                       <button
                         onClick={() => handleDeleteNote(note.id)}
-                        className="p-1.5 rounded text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-500/10"
+                        className="p-1.5 rounded text-slate-600 dark:text-slate-300 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-500/10"
                         title="Delete note"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
@@ -304,7 +304,7 @@ export const NotesPanel: React.FC<NotesPanelProps> = ({
                     </h5>
                   )}
 
-                  <p className="text-xs text-slate-800 dark:text-slate-200 whitespace-pre-wrap leading-relaxed font-sans">
+                  <p className="text-xs text-slate-900 dark:text-slate-100 whitespace-pre-wrap leading-relaxed font-sans">
                     {note.content}
                   </p>
                 </>

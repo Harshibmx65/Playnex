@@ -45,16 +45,17 @@ export const LoginPage: React.FC = () => {
   };
 
   const handleQuickFillDemo = () => {
-    setEmail('testuser123@example.com');
+    setEmail('demo@learner.com');
     setPassword('password123');
     setError(null);
   };
+
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-slate-50 dark:bg-[#080d1a] text-slate-900 dark:text-slate-100 relative selection:bg-cyan-400 selection:text-black transition-colors duration-200">
       {/* Top Header Controls */}
       <div className="absolute top-6 left-6 right-6 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-1.5 text-xs font-mono text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">
+        <Link to="/" className="flex items-center gap-1.5 text-xs font-mono font-bold text-slate-700 hover:text-slate-950 dark:text-slate-300 dark:hover:text-white transition-colors">
           <ArrowLeft className="w-4 h-4" />
           <span>Back to Home</span>
         </Link>
@@ -70,28 +71,28 @@ export const LoginPage: React.FC = () => {
           <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white">
             Sign In to Playnex
           </h1>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-mono">
+          <p className="text-xs text-slate-700 dark:text-slate-300 mt-1 font-mono font-medium">
             Distraction-free YouTube playlist learning & progress platform
           </p>
         </div>
 
         {/* Login Card */}
         <div className="p-6 rounded-2xl bg-white dark:bg-[#0c1426] border border-slate-200 dark:border-white/[0.08] shadow-md dark:shadow-2xl space-y-4">
-          <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 border-b border-slate-100 dark:border-white/[0.08] pb-3 font-mono">
+          <div className="flex items-center justify-between text-xs text-slate-700 dark:text-slate-300 border-b border-slate-100 dark:border-white/[0.08] pb-3 font-mono font-semibold">
             <span>Enter your credentials</span>
             <button
               type="button"
               onClick={handleQuickFillDemo}
-              className="flex items-center gap-1 text-[11px] text-cyan-600 dark:text-[#00e5ff] hover:underline font-bold"
+              className="flex items-center gap-1 text-xs text-cyan-700 dark:text-[#00e5ff] hover:underline font-bold"
               title="Fill with test account credentials"
             >
-              <Sparkles className="w-3 h-3" />
+              <Sparkles className="w-3.5 h-3.5" />
               <span>Fill Demo User</span>
             </button>
           </div>
 
           {error && (
-            <div className="flex items-start gap-2 p-3 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-600 dark:text-rose-400 text-xs font-mono animate-shake">
+            <div className="flex items-start gap-2 p-3 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-600 dark:text-rose-400 text-xs font-mono font-bold animate-shake">
               <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
               <span>{error}</span>
             </div>
@@ -99,11 +100,11 @@ export const LoginPage: React.FC = () => {
 
           <form onSubmit={handleLogin} className="space-y-3.5">
             <div>
-              <label className="block text-xs font-mono font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1">
+              <label className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200 mb-1">
                 Email Address
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
                   <Mail className="w-4 h-4" />
                 </div>
                 <input
@@ -112,17 +113,17 @@ export const LoginPage: React.FC = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@domain.com"
                   required
-                  className="w-full pl-9 pr-4 py-2 bg-slate-50 dark:bg-[#070b14] border border-slate-300 dark:border-white/[0.08] rounded-xl text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-cyan-500"
+                  className="w-full pl-9 pr-4 py-2 bg-slate-50 dark:bg-[#070b14] border-2 border-slate-300 dark:border-white/[0.08] rounded-xl text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-cyan-500"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-mono font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1">
+              <label className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200 mb-1">
                 Password
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
                   <Lock className="w-4 h-4" />
                 </div>
                 <input
@@ -131,12 +132,12 @@ export const LoginPage: React.FC = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Your account password"
                   required
-                  className="w-full pl-9 pr-10 py-2 bg-slate-50 dark:bg-[#070b14] border border-slate-300 dark:border-white/[0.08] rounded-xl text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-cyan-500"
+                  className="w-full pl-9 pr-10 py-2 bg-slate-50 dark:bg-[#070b14] border-2 border-slate-300 dark:border-white/[0.08] rounded-xl text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-cyan-500"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"
                   tabIndex={-1}
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -160,9 +161,9 @@ export const LoginPage: React.FC = () => {
             </button>
           </form>
 
-          <div className="pt-2 text-center text-xs text-slate-500 dark:text-slate-400 font-mono">
+          <div className="pt-2 text-center text-xs text-slate-700 dark:text-slate-300 font-mono font-medium">
             Don't have an account?{' '}
-            <Link to="/register" className="font-semibold text-cyan-600 dark:text-[#00e5ff] hover:underline">
+            <Link to="/register" className="font-bold text-cyan-700 dark:text-[#00e5ff] hover:underline">
               Create one now
             </Link>
           </div>

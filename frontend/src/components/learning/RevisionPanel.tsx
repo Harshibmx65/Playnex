@@ -108,10 +108,10 @@ export const RevisionPanel: React.FC<RevisionPanelProps> = ({
       </div>
 
       {/* Revision Form Card */}
-      <div className="p-4 rounded-2xl bg-slate-50 dark:bg-[#0c1426] border border-slate-200 dark:border-white/[0.08] space-y-4 shadow-sm">
+      <div className="p-4 rounded-2xl bg-slate-50 dark:bg-[#0c1426] border-2 border-slate-300 dark:border-white/[0.08] space-y-4 shadow-sm">
         {/* Priority Selector */}
         <div>
-          <label className="block text-xs font-mono font-semibold uppercase text-slate-600 dark:text-slate-400 mb-2">
+          <label className="block text-xs font-mono font-bold uppercase text-slate-800 dark:text-slate-200 mb-2">
             Priority Queue Level
           </label>
           <div className="grid grid-cols-3 gap-2">
@@ -127,7 +127,7 @@ export const RevisionPanel: React.FC<RevisionPanelProps> = ({
                       : p === 'MEDIUM'
                       ? 'bg-amber-500/15 text-amber-700 dark:text-amber-400 border-amber-400 shadow-sm'
                       : 'bg-sky-500/15 text-sky-700 dark:text-sky-400 border-sky-400 shadow-sm'
-                    : 'bg-white dark:bg-[#070b14] text-slate-500 dark:text-slate-400 border-slate-200 dark:border-white/[0.08] hover:border-slate-300 dark:hover:border-white/20'
+                    : 'bg-white dark:bg-[#070b14] text-slate-700 dark:text-slate-300 border-slate-300 dark:border-white/[0.08] hover:border-slate-400 dark:hover:border-white/20'
                 }`}
               >
                 {p}
@@ -138,7 +138,7 @@ export const RevisionPanel: React.FC<RevisionPanelProps> = ({
 
         {/* Status Selector */}
         <div>
-          <label className="block text-xs font-mono font-semibold uppercase text-slate-600 dark:text-slate-400 mb-2">
+          <label className="block text-xs font-mono font-bold uppercase text-slate-800 dark:text-slate-200 mb-2">
             Recall Status
           </label>
           <div className="grid grid-cols-2 gap-2 font-mono text-xs">
@@ -147,8 +147,8 @@ export const RevisionPanel: React.FC<RevisionPanelProps> = ({
               onClick={() => setStatus('NEED_REVISION')}
               className={`py-2 px-3 rounded-xl font-bold transition-all border ${
                 status === 'NEED_REVISION'
-                  ? 'bg-amber-500/15 text-amber-700 dark:text-amber-400 border-amber-400 shadow-sm'
-                  : 'bg-white dark:bg-[#070b14] text-slate-500 dark:text-slate-400 border-slate-200 dark:border-white/[0.08]'
+                  ? 'bg-amber-500/15 text-amber-800 dark:text-amber-400 border-amber-400 shadow-sm'
+                  : 'bg-white dark:bg-[#070b14] text-slate-700 dark:text-slate-300 border-slate-300 dark:border-white/[0.08]'
               }`}
             >
               Need Revision
@@ -158,8 +158,8 @@ export const RevisionPanel: React.FC<RevisionPanelProps> = ({
               onClick={() => setStatus('REVISED')}
               className={`py-2 px-3 rounded-xl font-bold transition-all border ${
                 status === 'REVISED'
-                  ? 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border-emerald-400 shadow-sm'
-                  : 'bg-white dark:bg-[#070b14] text-slate-500 dark:text-slate-400 border-slate-200 dark:border-white/[0.08]'
+                  ? 'bg-emerald-500/15 text-emerald-800 dark:text-emerald-400 border-emerald-400 shadow-sm'
+                  : 'bg-white dark:bg-[#070b14] text-slate-700 dark:text-slate-300 border-slate-300 dark:border-white/[0.08]'
               }`}
             >
               Mastered / Revised
@@ -169,7 +169,7 @@ export const RevisionPanel: React.FC<RevisionPanelProps> = ({
 
         {/* Revision Notes */}
         <div>
-          <label className="block text-xs font-mono font-semibold uppercase text-slate-600 dark:text-slate-400 mb-2">
+          <label className="block text-xs font-mono font-bold uppercase text-slate-800 dark:text-slate-200 mb-2">
             Revision Reason or Focal Points (Optional)
           </label>
           <textarea
@@ -177,7 +177,7 @@ export const RevisionPanel: React.FC<RevisionPanelProps> = ({
             onChange={(e) => setNotes(e.target.value)}
             placeholder="e.g. Re-watch the section explaining async generator locks before interviews..."
             rows={3}
-            className="w-full px-3 py-2 text-xs bg-white dark:bg-[#070b14] border border-slate-300 dark:border-white/[0.08] rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-amber-500"
+            className="w-full px-3 py-2 text-xs bg-white dark:bg-[#070b14] border-2 border-slate-300 dark:border-white/[0.08] rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-amber-500"
           />
         </div>
 
@@ -186,13 +186,13 @@ export const RevisionPanel: React.FC<RevisionPanelProps> = ({
             <button
               type="button"
               onClick={handleRemoveRevision}
-              className="flex items-center gap-1 text-xs text-rose-600 dark:text-rose-400 hover:underline font-mono"
+              className="flex items-center gap-1 text-xs text-rose-600 dark:text-rose-400 hover:underline font-mono font-bold"
             >
               <Trash2 className="w-3.5 h-3.5" />
               <span>Remove from Queue</span>
             </button>
           ) : (
-            <span className="text-[11px] font-mono text-slate-500">Not flagged yet</span>
+            <span className="text-xs font-mono text-slate-600 dark:text-slate-400 font-medium">Not flagged yet</span>
           )}
 
           <button

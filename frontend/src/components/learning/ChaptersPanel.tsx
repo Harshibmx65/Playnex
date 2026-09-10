@@ -63,12 +63,12 @@ export const ChaptersPanel: React.FC<ChaptersPanelProps> = ({
             <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-wider">
               Creator Topics & Timestamps
             </h3>
-            <p className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">
+            <p className="text-xs text-slate-700 dark:text-slate-300 font-mono font-medium">
               Click any topic to jump straight into playback
             </p>
           </div>
         </div>
-        <span className="px-2.5 py-0.5 rounded-full font-mono text-xs font-bold bg-cyan-50 dark:bg-[#00e5ff]/10 text-cyan-700 dark:text-[#00e5ff] border border-cyan-200 dark:border-[#00e5ff]/30">
+        <span className="px-2.5 py-0.5 rounded-full font-mono text-xs font-bold bg-cyan-100 dark:bg-[#00e5ff]/10 text-cyan-900 dark:text-[#00e5ff] border border-cyan-300 dark:border-[#00e5ff]/30">
           {chapters.length} Topics
         </span>
       </div>
@@ -85,12 +85,12 @@ export const ChaptersPanel: React.FC<ChaptersPanelProps> = ({
               key={`${chapter.timestamp}-${index}`}
               data-chapter-index={index}
               onClick={() => onSeek(chapter.timestamp)}
-              className={`p-3 rounded-2xl cursor-pointer transition-all duration-200 border flex items-center justify-between gap-3 group select-none ${
+              className={`p-3 rounded-2xl cursor-pointer transition-all duration-200 border-2 flex items-center justify-between gap-3 group select-none ${
                 isActive
                   ? 'bg-cyan-50 dark:bg-[#0f1d38] border-cyan-500 dark:border-[#00e5ff] shadow-md dark:shadow-lg dark:shadow-cyan-500/15 scale-[1.01]'
                   : isPassed
-                  ? 'bg-slate-50/80 dark:bg-[#070b14]/70 border-slate-200 dark:border-white/[0.05] hover:border-slate-300 dark:hover:border-white/20 hover:bg-slate-100 dark:hover:bg-[#0c1527]'
-                  : 'bg-white dark:bg-[#0a1020] border-slate-200 dark:border-white/[0.08] hover:border-cyan-500/50 hover:bg-slate-50 dark:hover:bg-[#0c1527]'
+                  ? 'bg-slate-50/80 dark:bg-[#070b14]/70 border-slate-300 dark:border-white/[0.05] hover:border-slate-400 dark:hover:border-white/20 hover:bg-slate-100 dark:hover:bg-[#0c1527]'
+                  : 'bg-white dark:bg-[#0a1020] border-slate-300 dark:border-white/[0.08] hover:border-cyan-500/50 hover:bg-slate-50 dark:hover:bg-[#0c1527]'
               }`}
             >
               <div className="flex items-center gap-3 min-w-0 flex-1">
@@ -105,30 +105,30 @@ export const ChaptersPanel: React.FC<ChaptersPanelProps> = ({
                     isActive
                       ? 'bg-cyan-500 dark:bg-[#00e5ff] text-black shadow-sm'
                       : isPassed
-                      ? 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20'
-                      : 'bg-slate-100 dark:bg-[#0c1426] text-cyan-700 dark:text-[#00e5ff] border border-slate-200 dark:border-[#00e5ff]/30 group-hover:bg-cyan-50 dark:group-hover:bg-[#00e5ff]/20'
+                      ? 'bg-emerald-100 dark:bg-emerald-500/15 text-emerald-900 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-500/30'
+                      : 'bg-slate-100 dark:bg-[#0c1426] text-cyan-800 dark:text-[#00e5ff] border border-slate-300 dark:border-[#00e5ff]/30 group-hover:bg-cyan-50 dark:group-hover:bg-[#00e5ff]/20'
                   }`}
                   title={`Jump to ${chapter.timestamp_formatted}`}
                 >
-                  <Clock className="w-3 h-3" />
+                  <Clock className="w-3.5 h-3.5" />
                   <span>{chapter.timestamp_formatted}</span>
                 </button>
 
                 {/* Chapter Topic Title */}
                 <div className="min-w-0 flex-1">
                   <p
-                    className={`text-xs font-semibold line-clamp-2 leading-snug transition-colors ${
+                    className={`text-xs leading-snug transition-colors ${
                       isActive
                         ? 'text-slate-900 dark:text-white font-bold'
                         : isPassed
-                        ? 'text-slate-600 dark:text-slate-400'
-                        : 'text-slate-800 dark:text-slate-200 group-hover:text-cyan-600 dark:group-hover:text-[#00e5ff]'
+                        ? 'text-slate-700 dark:text-slate-300 font-semibold'
+                        : 'text-slate-900 dark:text-slate-100 font-semibold group-hover:text-cyan-700 dark:group-hover:text-[#00e5ff]'
                     }`}
                   >
                     {chapter.title}
                   </p>
                   {isActive && (
-                    <span className="text-[10px] font-mono font-bold text-cyan-700 dark:text-cyan-300 flex items-center gap-1 mt-0.5">
+                    <span className="text-[10px] font-mono font-bold text-cyan-800 dark:text-cyan-300 flex items-center gap-1 mt-0.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 dark:bg-[#00e5ff] animate-ping" />
                       <span>Playing Now</span>
                     </span>
@@ -141,14 +141,14 @@ export const ChaptersPanel: React.FC<ChaptersPanelProps> = ({
                   isActive
                     ? 'bg-cyan-500 dark:bg-[#00e5ff] text-black'
                     : isPassed
-                    ? 'text-emerald-600 dark:text-emerald-400'
-                    : 'text-slate-400 group-hover:text-cyan-600 dark:group-hover:text-[#00e5ff]'
+                    ? 'text-emerald-700 dark:text-emerald-400'
+                    : 'text-slate-500 group-hover:text-cyan-600 dark:group-hover:text-[#00e5ff]'
                 }`}
               >
                 {isPassed && !isActive ? (
-                  <CheckCircle2 className="w-3.5 h-3.5" />
+                  <CheckCircle2 className="w-4 h-4" />
                 ) : (
-                  <Play className="w-3.5 h-3.5 fill-current" />
+                  <Play className="w-4 h-4 fill-current" />
                 )}
               </div>
             </div>

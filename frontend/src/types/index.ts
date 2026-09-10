@@ -14,14 +14,6 @@ export interface AuthResponse {
   user: User;
 }
 
-export interface OtpResponse {
-  message: string;
-  email: string;
-  cooldown_seconds: number;
-  expires_in_seconds: number;
-  delivery_mode?: string;
-  dev_otp?: string;
-}
 
 
 export interface Tag {

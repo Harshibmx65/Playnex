@@ -59,10 +59,10 @@ export const AnalyticsPage: React.FC = () => {
           <BarChart3 className="w-5 h-5" />
         </div>
         <div>
-          <h1 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">
+          <h1 className="text-xl sm:text-2xl font-black text-slate-950 dark:text-white">
             Progress Analytics & Mastery
           </h1>
-          <p className="text-xs text-slate-500 dark:text-slate-400 font-mono mt-0.5">
+          <p className="text-xs text-slate-700 dark:text-slate-300 font-mono mt-0.5">
             High-level metrics of curriculum completion, study velocity, and revision habits.
           </p>
         </div>
@@ -71,59 +71,59 @@ export const AnalyticsPage: React.FC = () => {
       {/* Primary KPI Breakdown Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Overall Completion Card */}
-        <div className="p-6 rounded-2xl bg-white dark:bg-[#0c1426] border border-slate-200 dark:border-white/[0.08] space-y-4 shadow-sm dark:shadow-lg">
+        <div className="p-6 rounded-2xl bg-white dark:bg-[#0c1426] border-2 border-slate-200 dark:border-white/[0.08] space-y-4 shadow-sm dark:shadow-lg">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Overall Completion</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Overall Completion</span>
             <TrendingUp className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
           </div>
           <div className="flex items-baseline gap-2">
-            <span className="text-4xl font-black text-slate-900 dark:text-white">{stats?.overall_completion_percentage || 0}%</span>
-            <span className="text-xs text-emerald-600 dark:text-emerald-400 font-semibold">{completed} of {totalVideos} videos</span>
+            <span className="text-4xl font-black text-slate-950 dark:text-white">{stats?.overall_completion_percentage || 0}%</span>
+            <span className="text-xs text-emerald-700 dark:text-emerald-400 font-bold">{completed} of {totalVideos} videos</span>
           </div>
 
-          <div className="w-full bg-slate-200 dark:bg-[#070b14] rounded-full h-3 overflow-hidden p-0.5 border border-slate-200 dark:border-white/[0.08]">
+          <div className="w-full bg-slate-200 dark:bg-[#070b14] rounded-full h-3.5 overflow-hidden p-0.5 border border-slate-300 dark:border-white/[0.12]">
             <div
               className="h-full rounded-full bg-gradient-to-r from-[#00e5ff] via-cyan-400 to-emerald-400 transition-all duration-700"
               style={{ width: `${stats?.overall_completion_percentage || 0}%` }}
             />
           </div>
 
-          <p className="text-xs text-slate-500 dark:text-slate-400">
+          <p className="text-xs text-slate-700 dark:text-slate-300 font-medium">
             {stats?.completed_duration_formatted || '0h'} mastered out of {stats?.total_duration_formatted || '0h'} total across {stats?.total_playlists} courses.
           </p>
         </div>
 
         {/* Video States Distribution */}
-        <div className="p-6 rounded-2xl bg-white dark:bg-[#0c1426] border border-slate-200 dark:border-white/[0.08] space-y-4 shadow-sm dark:shadow-lg">
-          <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Status Distribution</span>
+        <div className="p-6 rounded-2xl bg-white dark:bg-[#0c1426] border-2 border-slate-200 dark:border-white/[0.08] space-y-4 shadow-sm dark:shadow-lg">
+          <span className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Status Distribution</span>
           
           <div className="space-y-2.5">
             <div className="flex items-center justify-between text-xs">
-              <span className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-semibold">
+              <span className="flex items-center gap-1.5 text-emerald-700 dark:text-emerald-400 font-bold">
                 <CheckCircle2 className="w-3.5 h-3.5" />
                 Completed
               </span>
-              <span className="font-mono font-bold text-slate-900 dark:text-white">
+              <span className="font-mono font-bold text-slate-950 dark:text-white">
                 {completed} ({totalVideos ? Math.round((completed / totalVideos) * 100) : 0}%)
               </span>
             </div>
 
             <div className="flex items-center justify-between text-xs">
-              <span className="flex items-center gap-1.5 text-cyan-600 dark:text-[#00e5ff] font-semibold">
+              <span className="flex items-center gap-1.5 text-cyan-700 dark:text-[#00e5ff] font-bold">
                 <Clock3 className="w-3.5 h-3.5" />
                 In Progress
               </span>
-              <span className="font-mono font-bold text-slate-900 dark:text-white">
+              <span className="font-mono font-bold text-slate-950 dark:text-white">
                 {inProgress} ({totalVideos ? Math.round((inProgress / totalVideos) * 100) : 0}%)
               </span>
             </div>
 
             <div className="flex items-center justify-between text-xs">
-              <span className="flex items-center gap-1.5 text-slate-500 dark:text-slate-400 font-semibold">
+              <span className="flex items-center gap-1.5 text-slate-600 dark:text-slate-400 font-semibold">
                 <ListVideo className="w-3.5 h-3.5" />
                 Not Started
               </span>
-              <span className="font-mono font-bold text-slate-900 dark:text-white">
+              <span className="font-mono font-bold text-slate-950 dark:text-white">
                 {notStarted} ({totalVideos ? Math.round((notStarted / totalVideos) * 100) : 0}%)
               </span>
             </div>
@@ -131,26 +131,26 @@ export const AnalyticsPage: React.FC = () => {
         </div>
 
         {/* Focus & Memory Health */}
-        <div className="p-6 rounded-2xl bg-white dark:bg-[#0c1426] border border-slate-200 dark:border-white/[0.08] space-y-4 shadow-sm dark:shadow-lg">
-          <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Mastery & Recall</span>
+        <div className="p-6 rounded-2xl bg-white dark:bg-[#0c1426] border-2 border-slate-200 dark:border-white/[0.08] space-y-4 shadow-sm dark:shadow-lg">
+          <span className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Mastery & Recall</span>
 
           <div className="space-y-3">
             <div className="flex items-center justify-between text-xs">
-              <span className="text-slate-600 dark:text-slate-300">Pending Doubts</span>
-              <span className={`font-mono font-bold ${stats?.open_doubts_count ? 'text-rose-600 dark:text-rose-400' : 'text-emerald-600 dark:text-emerald-400'}`}>
+              <span className="text-slate-700 dark:text-slate-200 font-semibold">Pending Doubts</span>
+              <span className={`font-mono font-bold ${stats?.open_doubts_count ? 'text-rose-700 dark:text-rose-400' : 'text-emerald-700 dark:text-emerald-400'}`}>
                 {stats?.open_doubts_count || 0} Open
               </span>
             </div>
 
             <div className="flex items-center justify-between text-xs">
-              <span className="text-slate-600 dark:text-slate-300">Revision Queue</span>
-              <span className={`font-mono font-bold ${stats?.need_revision_count ? 'text-amber-600 dark:text-amber-400' : 'text-emerald-600 dark:text-emerald-400'}`}>
+              <span className="text-slate-700 dark:text-slate-200 font-semibold">Revision Queue</span>
+              <span className={`font-mono font-bold ${stats?.need_revision_count ? 'text-amber-700 dark:text-amber-400' : 'text-emerald-700 dark:text-emerald-400'}`}>
                 {stats?.need_revision_count || 0} Flags
               </span>
             </div>
           </div>
 
-          <div className="pt-2 border-t border-slate-100 dark:border-white/[0.06] text-xs text-slate-500 dark:text-slate-400">
+          <div className="pt-2 border-t border-slate-200 dark:border-white/[0.08] text-xs text-slate-700 dark:text-slate-300 font-medium">
             Keep doubt count low and revision queue clear for maximum concept retention.
           </div>
         </div>
@@ -158,30 +158,30 @@ export const AnalyticsPage: React.FC = () => {
 
       {/* Per Course Detailed Breakdown */}
       <div className="space-y-4">
-        <h2 className="text-lg font-bold text-slate-900 dark:text-white">Course-by-Course Progress</h2>
+        <h2 className="text-lg font-black text-slate-950 dark:text-white">Course-by-Course Progress</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {playlists.map((pl) => (
             <div
               key={pl.id}
-              className="p-5 rounded-2xl bg-white dark:bg-[#0c1426] border border-slate-200 dark:border-white/[0.08] shadow-sm dark:shadow-lg space-y-3 hover:border-cyan-500/40 transition-all"
+              className="p-5 rounded-2xl bg-white dark:bg-[#0c1426] border-2 border-slate-200 dark:border-white/[0.08] shadow-sm dark:shadow-lg space-y-3 hover:border-cyan-500/40 transition-all"
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0 flex-1">
                   <Link
                     to={`/playlist/${pl.id}`}
-                    className="text-sm font-bold text-slate-900 dark:text-white hover:text-cyan-600 dark:hover:text-[#00e5ff] transition-colors truncate block"
+                    className="text-sm font-bold text-slate-950 dark:text-white hover:text-cyan-600 dark:hover:text-[#00e5ff] transition-colors truncate block"
                   >
                     {pl.title}
                   </Link>
                   {pl.channel_name && (
-                    <span className="text-xs text-slate-500 dark:text-slate-400 font-mono mt-0.5 block truncate">
+                    <span className="text-xs text-slate-700 dark:text-slate-300 font-mono font-medium mt-0.5 block truncate">
                       {pl.channel_name}
                     </span>
                   )}
                 </div>
 
-                <span className="text-xs font-mono font-bold text-cyan-700 dark:text-[#00e5ff] bg-cyan-50 dark:bg-[#00e5ff]/10 px-2.5 py-1 rounded-lg border border-cyan-200 dark:border-[#00e5ff]/30 shrink-0">
+                <span className="text-xs font-mono font-bold text-cyan-800 dark:text-[#00e5ff] bg-cyan-100 dark:bg-[#00e5ff]/15 px-3 py-1 rounded-lg border border-cyan-300 dark:border-[#00e5ff]/30 shrink-0">
                   {Math.round(pl.progress_percentage)}%
                 </span>
               </div>
@@ -193,13 +193,13 @@ export const AnalyticsPage: React.FC = () => {
                 size="md"
               />
 
-              <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 font-mono pt-1">
+              <div className="flex items-center justify-between text-xs text-slate-700 dark:text-slate-300 font-mono font-medium pt-1">
                 <span>
                   {pl.completed_videos} of {pl.total_videos} completed {pl.total_duration_seconds ? `• ${formatTotalHours(pl.total_duration_seconds)}` : ''}
                 </span>
                 <Link
                   to={`/playlist/${pl.id}`}
-                  className="text-cyan-600 dark:text-[#00e5ff] hover:underline font-bold"
+                  className="text-cyan-700 dark:text-[#00e5ff] hover:underline font-bold"
                 >
                   Open Player →
                 </Link>

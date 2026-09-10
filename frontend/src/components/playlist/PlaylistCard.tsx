@@ -57,19 +57,19 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({ playlist, onDelete, 
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 dark:from-[#0c1426] via-transparent to-transparent" />
 
         {/* Video count & complete length badge */}
-        <div className="absolute top-2.5 right-2.5 px-2.5 py-0.5 rounded-md bg-black/85 backdrop-blur-md text-[10px] font-mono font-bold text-cyan-300 dark:text-[#00e5ff] border border-white/10 flex items-center gap-1.5 shadow-md">
+        <div className="absolute top-2.5 right-2.5 px-2.5 py-0.5 rounded-md bg-black/90 backdrop-blur-md text-[11px] font-mono font-bold text-cyan-300 dark:text-[#00e5ff] border border-white/20 flex items-center gap-1.5 shadow-md">
           <span>{playlist.total_videos} {playlist.total_videos === 1 ? 'VIDEO' : 'VIDEOS'}</span>
           {playlist.total_duration_seconds > 0 && (
             <>
-              <span className="text-white/30">•</span>
-              <span className="text-slate-100 font-semibold">{formatTotalHours(playlist.total_duration_seconds)}</span>
+              <span className="text-white/40">•</span>
+              <span className="text-white font-bold">{formatTotalHours(playlist.total_duration_seconds)}</span>
             </>
           )}
         </div>
 
         {/* Channel name badge */}
         {playlist.channel_name && (
-          <div className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-md bg-black/70 backdrop-blur-md text-[10px] font-mono text-slate-200 dark:text-slate-300 border border-white/10 truncate max-w-[60%]">
+          <div className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-md bg-black/80 backdrop-blur-md text-[11px] font-mono font-semibold text-slate-100 dark:text-slate-200 border border-white/20 truncate max-w-[60%]">
             {playlist.channel_name}
           </div>
         )}
@@ -90,7 +90,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({ playlist, onDelete, 
         <div>
           <div className="flex items-start justify-between gap-2">
             <Link to={`/playlist/${playlist.id}`}>
-              <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-[#00e5ff] transition-colors line-clamp-1">
+              <h3 className="text-sm sm:text-base font-black text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-[#00e5ff] transition-colors line-clamp-1">
                 {playlist.title}
               </h3>
             </Link>
@@ -102,7 +102,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({ playlist, onDelete, 
                   setShowMenu(!showMenu);
                 }}
                 disabled={isSyncing}
-                className="p-1 rounded-md text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.05] transition-colors disabled:opacity-50"
+                className="p-1 rounded-md text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.05] transition-colors disabled:opacity-50"
                 title="Options"
               >
                 {isSyncing ? (
@@ -115,11 +115,11 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({ playlist, onDelete, 
               {showMenu && (
                 <>
                   <div className="fixed inset-0 z-10" onClick={() => setShowMenu(false)} />
-                  <div className="absolute right-0 mt-1 w-44 rounded-xl bg-white dark:bg-[#0a1020] border border-slate-200 dark:border-white/10 shadow-xl py-1 z-20 font-mono text-xs animate-fade-in">
+                  <div className="absolute right-0 mt-1 w-44 rounded-xl bg-white dark:bg-[#0a1020] border border-slate-200 dark:border-white/10 shadow-xl py-1 z-20 font-mono text-xs animate-fade-in font-semibold">
                     {onSync && (
                       <button
                         onClick={handleSyncClick}
-                        className="flex items-center gap-2 w-full px-3 py-2 text-slate-700 dark:text-slate-200 hover:bg-cyan-50 dark:hover:bg-cyan-500/10 hover:text-cyan-600 dark:hover:text-[#00e5ff] transition-colors"
+                        className="flex items-center gap-2 w-full px-3 py-2 text-slate-800 dark:text-slate-100 hover:bg-cyan-50 dark:hover:bg-cyan-500/10 hover:text-cyan-600 dark:hover:text-[#00e5ff] transition-colors"
                       >
                         <RotateCw className="w-3.5 h-3.5" />
                         Sync with YouTube
@@ -132,7 +132,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({ playlist, onDelete, 
                           setShowMenu(false);
                           onDelete(playlist.id);
                         }}
-                        className="flex items-center gap-2 w-full px-3 py-2 text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition-colors"
+                        className="flex items-center gap-2 w-full px-3 py-2 text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition-colors font-bold"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                         Delete Course
@@ -145,9 +145,9 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({ playlist, onDelete, 
           </div>
 
           {playlist.last_watched_video && (
-            <div className="flex items-center gap-1.5 mt-1 text-xs text-slate-500 dark:text-slate-400 truncate">
-              <Clock className="w-3 h-3 text-cyan-600 dark:text-[#00e5ff] shrink-0" />
-              <span className="truncate">Last: <strong className="text-slate-700 dark:text-slate-200 font-semibold">{playlist.last_watched_video}</strong></span>
+            <div className="flex items-center gap-1.5 mt-1.5 text-xs text-slate-700 dark:text-slate-300 truncate">
+              <Clock className="w-3.5 h-3.5 text-cyan-600 dark:text-[#00e5ff] shrink-0" />
+              <span className="truncate">Last: <strong className="text-slate-900 dark:text-white font-bold">{playlist.last_watched_video}</strong></span>
             </div>
           )}
         </div>
@@ -161,36 +161,36 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({ playlist, onDelete, 
         />
 
         {/* Footer Badges */}
-        <div className="pt-2.5 border-t border-slate-100 dark:border-white/[0.08] flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 font-mono">
+        <div className="pt-2.5 border-t border-slate-200 dark:border-white/[0.08] flex items-center justify-between text-xs text-slate-700 dark:text-slate-300 font-mono font-bold">
           <div className="flex items-center gap-3">
             {playlist.open_doubts_count > 0 && (
               <span className="flex items-center gap-1 text-rose-600 dark:text-rose-400 font-bold" title={`${playlist.open_doubts_count} open doubts`}>
-                <HelpCircle className="w-3.5 h-3.5" />
+                <HelpCircle className="w-3.5 h-3.5 stroke-[2.5]" />
                 <span>{playlist.open_doubts_count}</span>
               </span>
             )}
 
             {playlist.revisions_count > 0 && (
               <span className="flex items-center gap-1 text-amber-600 dark:text-amber-400 font-bold" title={`${playlist.revisions_count} need revision`}>
-                <RotateCw className="w-3.5 h-3.5" />
+                <RotateCw className="w-3.5 h-3.5 stroke-[2.5]" />
                 <span>{playlist.revisions_count}</span>
               </span>
             )}
 
             {playlist.notes_count > 0 && (
-              <span className="flex items-center gap-1 text-cyan-600 dark:text-[#00e5ff] font-medium" title={`${playlist.notes_count} notes`}>
-                <BookOpen className="w-3.5 h-3.5" />
+              <span className="flex items-center gap-1 text-cyan-700 dark:text-[#00e5ff] font-bold" title={`${playlist.notes_count} notes`}>
+                <BookOpen className="w-3.5 h-3.5 stroke-[2.5]" />
                 <span>{playlist.notes_count}</span>
               </span>
             )}
 
-            <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-medium">
-              <CheckCircle2 className="w-3.5 h-3.5" />
+            <span className="flex items-center gap-1 text-emerald-700 dark:text-emerald-400 font-bold">
+              <CheckCircle2 className="w-3.5 h-3.5 stroke-[2.5]" />
               <span>{playlist.completed_videos}/{playlist.total_videos}</span>
             </span>
           </div>
 
-          <span className="text-[11px] text-slate-400 dark:text-slate-500">
+          <span className="text-xs text-slate-600 dark:text-slate-400 font-medium">
             {formatRelativeDate(playlist.last_activity)}
           </span>
         </div>

@@ -554,14 +554,14 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 sm:p-5 rounded-3xl bg-white dark:bg-[#0c1426] border-2 border-slate-300 dark:border-white/[0.08] shadow-md dark:shadow-xl">
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 mb-1 text-xs">
-            <span className="px-2.5 py-0.5 rounded-lg font-mono font-bold bg-cyan-100 dark:bg-[#00e5ff]/15 text-cyan-900 dark:text-[#00e5ff] border border-cyan-300 dark:border-[#00e5ff]/30 text-[11px]">
+            <span className="px-2.5 py-0.5 rounded-lg font-mono font-bold bg-cyan-100 dark:bg-[#00e5ff]/15 text-cyan-950 dark:text-[#00e5ff] border border-cyan-300 dark:border-[#00e5ff]/30 text-xs">
               LESSON #{video.position}
             </span>
-            <span className="text-slate-600 dark:text-slate-400 font-mono text-xs font-semibold">
+            <span className="text-slate-800 dark:text-slate-200 font-mono text-xs font-bold">
               {formatSeconds(currentTime)} / {formatSeconds(duration || video.duration_seconds)}
             </span>
           </div>
-          <h2 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white line-clamp-1">
+          <h2 className="text-sm sm:text-base font-black text-slate-900 dark:text-white line-clamp-1">
             {video.title}
           </h2>
         </div>
@@ -650,7 +650,7 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
               <>
                 <div className="fixed inset-0 z-20" onClick={() => setIsRevisionMenuOpen(false)} />
                 <div className="absolute right-0 top-full mt-2 w-48 rounded-2xl bg-white dark:bg-[#0a1020] border-2 border-slate-300 dark:border-white/15 shadow-2xl p-2 z-30 animate-fade-in text-xs space-y-1 font-mono">
-                  <div className="px-2 py-1 text-[10px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider border-b border-slate-200 dark:border-white/[0.08]">
+                  <div className="px-2 py-1 text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider border-b border-slate-200 dark:border-white/[0.08]">
                     Set Priority & Queue
                   </div>
                   <button
@@ -677,7 +677,7 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
                   {isMarkedRevision && (
                     <button
                       onClick={() => handleToggleRevision(localRevision?.priority || 'MEDIUM')}
-                      className="flex items-center justify-between w-full px-2.5 py-1.5 rounded-xl text-slate-500 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-500/10 border-t border-slate-100 dark:border-white/5 pt-1"
+                      className="flex items-center justify-between w-full px-2.5 py-1.5 rounded-xl text-slate-600 dark:text-slate-300 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-500/10 border-t border-slate-100 dark:border-white/5 pt-1 font-semibold"
                     >
                       <span>Remove from queue</span>
                     </button>
@@ -690,7 +690,7 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
           {/* NOTE BUTTON: Pauses video and moves control to Add Note form at current timestamp */}
           <button
             onClick={handleAddNoteClick}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-cyan-100 hover:bg-cyan-200 dark:bg-[#00e5ff]/15 dark:hover:bg-[#00e5ff]/25 text-cyan-900 dark:text-[#00e5ff] border-2 border-cyan-300 dark:border-[#00e5ff]/40 transition-all active:scale-95 shadow-sm"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-cyan-100 hover:bg-cyan-200 dark:bg-[#00e5ff]/15 dark:hover:bg-[#00e5ff]/25 text-cyan-950 dark:text-[#00e5ff] border-2 border-cyan-300 dark:border-[#00e5ff]/40 transition-all active:scale-95 shadow-sm"
             title="Pause video and take note at this exact second (Key: N)"
           >
             <BookOpen className="w-4 h-4 text-cyan-700 dark:text-[#00e5ff]" />
@@ -701,7 +701,7 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
           {/* DOUBT BUTTON: Pauses video and moves control to Add Doubt form at current timestamp */}
           <button
             onClick={handleAddDoubtClick}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-rose-100 hover:bg-rose-200 dark:bg-rose-500/15 dark:hover:bg-rose-500/25 text-rose-900 dark:text-rose-400 border-2 border-rose-300 dark:border-rose-500/40 transition-all active:scale-95 shadow-sm"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-rose-100 hover:bg-rose-200 dark:bg-rose-500/15 dark:hover:bg-rose-500/25 text-rose-950 dark:text-rose-400 border-2 border-rose-300 dark:border-rose-500/40 transition-all active:scale-95 shadow-sm"
             title="Pause video and log question at this exact second (Key: D)"
           >
             <HelpCircle className="w-4 h-4 text-rose-600 dark:text-rose-400" />
@@ -715,7 +715,7 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
       {chapters.length > 0 && (
         <div className="p-4 sm:p-5 rounded-3xl bg-white dark:bg-[#0c1426] border-2 border-slate-300 dark:border-white/[0.08] space-y-3 animate-fade-in shadow-md dark:shadow-xl">
           {/* Header with Title, Shortcuts & Controls */}
-          <div className="flex flex-wrap items-center justify-between gap-2.5 pb-2.5 border-b border-slate-100 dark:border-white/[0.06]">
+          <div className="flex flex-wrap items-center justify-between gap-2.5 pb-2.5 border-b border-slate-200 dark:border-white/[0.06]">
             <div className="flex items-center gap-2">
               <div className="p-1.5 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-[#00e5ff] border border-cyan-500/30">
                 <Bookmark className="w-4 h-4" />
@@ -726,14 +726,14 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
                     Topics & Chapters ({chapters.length})
                   </span>
                   {activeChapter && (
-                    <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-cyan-100 dark:bg-[#00e5ff]/15 text-cyan-800 dark:text-[#00e5ff] border border-cyan-300 dark:border-[#00e5ff]/30">
+                    <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-mono font-bold bg-cyan-100 dark:bg-[#00e5ff]/15 text-cyan-900 dark:text-[#00e5ff] border border-cyan-300 dark:border-[#00e5ff]/30">
                       <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 dark:bg-[#00e5ff] animate-pulse" />
                       #{activeChapterIndex + 1} Playing
                     </span>
                   )}
                 </div>
-                <p className="text-[11px] font-mono text-slate-500 dark:text-slate-400">
-                  Click any timestamp or use keys <kbd className="px-1 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-[10px] font-bold text-slate-800 dark:text-slate-200">[</kbd> <kbd className="px-1 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-[10px] font-bold text-slate-800 dark:text-slate-200">]</kbd> to jump
+                <p className="text-xs font-mono text-slate-700 dark:text-slate-300 font-medium">
+                  Click any timestamp or use keys <kbd className="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-xs font-bold text-slate-900 dark:text-slate-100 border border-slate-300 dark:border-slate-700">[</kbd> <kbd className="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-xs font-bold text-slate-900 dark:text-slate-100 border border-slate-300 dark:border-slate-700">]</kbd> to jump
                 </p>
               </div>
             </div>

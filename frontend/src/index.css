@@ -3,22 +3,33 @@
 @tailwind utilities;
 
 @layer base {
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
   body {
-    @apply bg-[#f4f6fb] text-slate-900 dark:bg-[#080d1a] dark:text-slate-100 font-sans antialiased selection:bg-[#00e5ff] selection:text-black transition-colors duration-200;
+    @apply bg-[#f4f7fb] text-slate-900 dark:bg-[#070c18] dark:text-slate-100 font-sans antialiased selection:bg-[#00e5ff] selection:text-black transition-colors duration-200;
+  }
+
+  /* Increase readability of default placeholders */
+  ::placeholder {
+    @apply text-slate-400 dark:text-slate-500 font-normal;
   }
 }
 
-/* Speedtest / Ookla High-End Responsive UI Tokens */
+/* High-End Responsive UI Tokens & Readable Contrast Surfaces */
 .speedtest-bg {
-  background: radial-gradient(circle at 50% 0%, #e2f1fd 0%, #f4f6fb 75%);
+  background: radial-gradient(circle at 50% 0%, #e0f2fe 0%, #f4f7fb 75%);
 }
 
 .dark .speedtest-bg {
-  background: radial-gradient(circle at 50% 0%, #101c36 0%, #080d1a 70%);
+  background: radial-gradient(circle at 50% 0%, #0f1c38 0%, #070c18 70%);
 }
 
 .glass-surface {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(203, 213, 225, 0.9);
@@ -26,11 +37,11 @@
 }
 
 .dark .glass-surface {
-  background: rgba(14, 23, 42, 0.7);
+  background: rgba(12, 20, 38, 0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: none;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 .glass-card {
@@ -42,11 +53,11 @@
 }
 
 .dark .glass-card {
-  background: rgba(16, 26, 48, 0.65);
+  background: rgba(14, 24, 46, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  box-shadow: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.25);
 }
 
 .glass-card-hover {
@@ -55,16 +66,16 @@
 
 .glass-card-hover:hover {
   background: #ffffff;
-  border-color: rgba(6, 182, 212, 0.6);
+  border-color: rgba(6, 182, 212, 0.7);
   transform: translateY(-2px);
   box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.1), 0 0 16px -4px rgba(6, 182, 212, 0.25);
 }
 
 .dark .glass-card-hover:hover {
-  background: rgba(22, 36, 68, 0.85);
-  border-color: rgba(0, 229, 255, 0.4);
+  background: rgba(20, 34, 64, 0.95);
+  border-color: rgba(0, 229, 255, 0.5);
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.5), 0 0 20px -4px rgba(0, 229, 255, 0.15);
+  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.5), 0 0 20px -4px rgba(0, 229, 255, 0.2);
 }
 
 /* Neon Glow Accents */

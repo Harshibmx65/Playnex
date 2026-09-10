@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { User, AuthResponse, OtpResponse } from '../types';
+import { User, AuthResponse } from '../types';
 import { authApi } from '../services/api';
 
 interface AuthContextType {
@@ -10,9 +10,6 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<void>;
   loginGuest: () => Promise<void>;
   loginDemo: () => Promise<void>; // Backward-compatible alias for guest
-  sendRegisterOtp: (name: string, email: string, password: string) => Promise<OtpResponse>;
-  verifyRegisterOtp: (email: string, otpCode: string) => Promise<void>;
-  resendRegisterOtp: (email: string) => Promise<OtpResponse>;
   register: (name: string, email: string, password: string) => Promise<void>;
   logout: () => void;
 }
@@ -62,19 +59,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     handleAuthSuccess(res);
   };
 
-  const sendRegisterOtp = async (name: string, email: string, password: string) => {
-    return await authApi.sendRegisterOtp(name, email, password);
-  };
-
-  const verifyRegisterOtp = async (email: string, otpCode: string) => {
-    const res = await authApi.verifyRegisterOtp(email, otpCode);
-    handleAuthSuccess(res);
-  };
-
-  const resendRegisterOtp = async (email: string) => {
-    return await authApi.resendRegisterOtp(email);
-  };
-
   const register = async (name: string, email: string, password: string) => {
     const res = await authApi.register(name, email, password);
     handleAuthSuccess(res);
@@ -99,9 +83,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         login,
         loginGuest,
         loginDemo: loginGuest,
-        sendRegisterOtp,
-        verifyRegisterOtp,
-        resendRegisterOtp,
         register,
         logout,
       }}
@@ -118,4 +99,5 @@ export const useAuth = () => {
   }
   return context;
 };
+
 

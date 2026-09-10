@@ -32,13 +32,13 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   return (
     <div className="w-full font-mono">
       {showLabel && (
-        <div className="flex items-center justify-between text-xs mb-1 font-medium">
-          <span className="text-slate-500 dark:text-slate-400 text-[11px]">
+        <div className="flex items-center justify-between text-xs mb-1 font-semibold">
+          <span className="text-slate-700 dark:text-slate-300 text-xs">
             {completedVideos !== undefined && totalVideos !== undefined
               ? `${completedVideos} of ${totalVideos} completed`
               : 'Progress'}
           </span>
-          <span className={`font-bold ${clamped === 100 ? 'text-emerald-600 dark:text-[#00e676]' : 'text-cyan-600 dark:text-[#00e5ff]'}`}>
+          <span className={`font-bold ${clamped === 100 ? 'text-emerald-700 dark:text-[#00e676]' : 'text-cyan-700 dark:text-[#00e5ff]'}`}>
             {clamped}%
           </span>
         </div>

@@ -64,7 +64,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar, isSidebarOpen }
             </Link>
 
             {/* Desktop Navigation Links */}
-            <nav className="hidden md:flex items-center gap-6 text-xs font-semibold">
+            <nav className="hidden md:flex items-center gap-6 text-xs font-bold">
               {navLinks.map((link) => {
                 const isActive = location.pathname === link.path;
                 return (
@@ -73,8 +73,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar, isSidebarOpen }
                     to={link.path}
                     className={`transition-all py-1 font-sans ${
                       isActive
-                        ? 'text-slate-900 dark:text-white font-black border-b-2 border-cyan-500 dark:border-[#00e5ff] tracking-tight'
-                        : 'text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white'
+                        ? 'text-slate-950 dark:text-white font-black border-b-2 border-cyan-500 dark:border-[#00e5ff] tracking-tight'
+                        : 'text-slate-700 hover:text-slate-950 dark:text-slate-200 dark:hover:text-white'
                     }`}
                   >
                     {link.name}
@@ -91,7 +91,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar, isSidebarOpen }
 
             {/* Guest Session Pill */}
             {user?.is_guest && (
-              <span className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-700 dark:text-amber-300 text-[11px] font-mono font-bold shadow-inner">
+              <span className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-500/15 border border-amber-500/40 text-amber-800 dark:text-amber-200 text-xs font-mono font-bold shadow-inner">
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
                 <span>Guest Session</span>
               </span>
@@ -151,12 +151,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar, isSidebarOpen }
                       <div className="flex items-center justify-between gap-1">
                         <p className="text-xs font-black text-slate-900 dark:text-white truncate">{user?.name}</p>
                         {user?.is_guest && (
-                          <span className="text-[9px] font-mono font-bold uppercase px-1.5 py-0.5 rounded-full bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/25">
+                          <span className="text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-800 dark:text-amber-300 border border-amber-500/30">
                             Guest
                           </span>
                         )}
                       </div>
-                      <p className="text-[11px] text-slate-500 dark:text-slate-300 font-mono truncate mt-0.5">{user?.email}</p>
+                      <p className="text-xs text-slate-600 dark:text-slate-300 font-mono truncate mt-0.5">{user?.email}</p>
                     </div>
 
                     {user?.is_guest && (
@@ -172,11 +172,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar, isSidebarOpen }
                       </div>
                     )}
 
-                    <div className="py-1.5 text-xs font-semibold">
+                    <div className="py-1.5 text-xs font-bold">
                       <Link
                         to="/dashboard"
                         onClick={() => setIsUserMenuOpen(false)}
-                        className="flex items-center gap-2.5 px-4 py-2 text-slate-700 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-200 dark:hover:text-white dark:hover:bg-white/[0.05] transition-colors"
+                        className="flex items-center gap-2.5 px-4 py-2 text-slate-800 hover:text-slate-950 hover:bg-slate-100 dark:text-slate-200 dark:hover:text-white dark:hover:bg-white/[0.08] transition-colors"
                       >
                         <UserIcon className="w-4 h-4 text-cyan-600 dark:text-[#00e5ff]" />
                         Dashboard
@@ -184,7 +184,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar, isSidebarOpen }
                       <Link
                         to="/analytics"
                         onClick={() => setIsUserMenuOpen(false)}
-                        className="flex items-center gap-2.5 px-4 py-2 text-slate-700 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-200 dark:hover:text-white dark:hover:bg-white/[0.05] transition-colors"
+                        className="flex items-center gap-2.5 px-4 py-2 text-slate-800 hover:text-slate-950 hover:bg-slate-100 dark:text-slate-200 dark:hover:text-white dark:hover:bg-white/[0.08] transition-colors"
                       >
                         <Activity className="w-4 h-4 text-emerald-600 dark:text-[#00e676]" />
                         Analytics

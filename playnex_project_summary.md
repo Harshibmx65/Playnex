@@ -10,8 +10,9 @@
 - **Backend ([FastAPI / Python](file:///c:/Users/harsh/Desktop/playnex/backend/app/main.py)):** High-performance asynchronous REST API powered by SQLAlchemy ORM, SQLite DB, Pydantic v2 validation schemas, and JWT/Bcrypt security.
 - **Frontend ([React 18 + Vite + TypeScript](file:///c:/Users/harsh/Desktop/playnex/frontend/src/App.tsx)):** Single Page Application styled with modern dark-mode aesthetics, responsive glassmorphism, speedtest-inspired visual telemetry gauges, and Lucide iconography.
 - **Authentication & Security ([auth.py](file:///c:/Users/harsh/Desktop/playnex/backend/app/api/auth.py)):** Dual-mode authentication system:
-  1. **6-Digit Email OTP Verification:** Secure signup with 60-second cooldown rate-limiting, 10-minute expiration, and 5-attempt brute-force protection ([email.py](file:///c:/Users/harsh/Desktop/playnex/backend/app/services/email.py)).
+  1. **Direct Registration with Strict Password Policy:** Minimum 8 characters, min 1 uppercase, min 1 lowercase, and min 1 special character with bcrypt hashing, PyJWT tokens, and security headers.
   2. **1-Click Ephemeral Guest Mode:** Instant sandbox session pre-seeded with starter FastAPI courses, interactive notes, and doubts for frictionless exploration.
+
 
 ---
 

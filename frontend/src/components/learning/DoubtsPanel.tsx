@@ -233,8 +233,8 @@ export const DoubtsPanel: React.FC<DoubtsPanelProps> = ({
         ) : doubts.length === 0 ? (
           <div className="py-10 text-center rounded-2xl border-2 border-dashed border-slate-300 dark:border-white/[0.08] p-6 space-y-2 bg-slate-50/50 dark:bg-transparent">
             <HelpCircle className="w-8 h-8 text-slate-400 dark:text-slate-600 mx-auto" />
-            <p className="text-xs text-slate-700 dark:text-slate-300 font-bold">No doubts logged for this video</p>
-            <p className="text-[11px] text-slate-500 max-w-xs mx-auto">
+            <p className="text-xs text-slate-900 dark:text-slate-100 font-bold">No doubts logged for this video</p>
+            <p className="text-xs text-slate-700 dark:text-slate-300 font-medium max-w-xs mx-auto">
               Click the "Doubt @ 00:00" button under the player or "+ Log Doubt" to pause and record questions.
             </p>
           </div>
@@ -248,7 +248,7 @@ export const DoubtsPanel: React.FC<DoubtsPanelProps> = ({
                 key={doubt.id}
                 className={`p-4 rounded-2xl border-2 space-y-2.5 transition-all shadow-sm ${
                   isResolved
-                    ? 'bg-slate-50 dark:bg-[#0c1426]/60 border-slate-300 dark:border-white/[0.05] opacity-80'
+                    ? 'bg-slate-50 dark:bg-[#0c1426]/60 border-slate-300 dark:border-white/[0.05] opacity-90'
                     : 'bg-white dark:bg-[#0c1426] border-slate-300 dark:border-white/[0.08] hover:border-rose-500/50'
                 }`}
               >
@@ -257,18 +257,18 @@ export const DoubtsPanel: React.FC<DoubtsPanelProps> = ({
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => onSeek(doubt.timestamp)}
-                      className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-rose-100 dark:bg-rose-500/10 text-rose-900 dark:text-rose-400 hover:bg-rose-200 dark:hover:bg-rose-500/20 border border-rose-300 dark:border-rose-500/30 text-xs font-mono font-bold transition-colors"
+                      className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-rose-100 dark:bg-rose-500/10 text-rose-950 dark:text-rose-400 hover:bg-rose-200 dark:hover:bg-rose-500/20 border border-rose-300 dark:border-rose-500/30 text-xs font-mono font-bold transition-colors"
                       title="Jump to video timestamp"
                     >
-                      <Clock className="w-3 h-3 text-rose-600 dark:text-rose-400" />
+                      <Clock className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400" />
                       <span>{doubt.timestamp_formatted || formatSeconds(doubt.timestamp)}</span>
                     </button>
 
                     <span
-                      className={`text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded-full ${
+                      className={`text-xs font-mono font-bold uppercase px-2 py-0.5 rounded-full ${
                         isResolved
-                          ? 'bg-emerald-100 dark:bg-emerald-500/15 text-emerald-900 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-500/30'
-                          : 'bg-rose-100 dark:bg-rose-500/15 text-rose-900 dark:text-rose-400 border border-rose-300 dark:border-rose-500/30'
+                          ? 'bg-emerald-100 dark:bg-emerald-500/15 text-emerald-900 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-500/30'
+                          : 'bg-rose-100 dark:bg-rose-500/15 text-rose-950 dark:text-rose-300 border border-rose-300 dark:border-rose-500/30'
                       }`}
                     >
                       {doubt.status}
@@ -281,8 +281,8 @@ export const DoubtsPanel: React.FC<DoubtsPanelProps> = ({
                       onClick={() => handleToggleResolve(doubt)}
                       className={`p-1.5 rounded-lg transition-colors ${
                         isResolved
-                          ? 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
-                          : 'text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-500/10'
+                          ? 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                          : 'text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-500/10'
                       }`}
                       title={isResolved ? 'Re-open doubt' : 'Mark resolved'}
                     >
@@ -290,7 +290,7 @@ export const DoubtsPanel: React.FC<DoubtsPanelProps> = ({
                     </button>
                     <button
                       onClick={() => handleDeleteDoubt(doubt.id)}
-                      className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-500/10"
+                      className="p-1.5 rounded-lg text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-500/10"
                       title="Delete doubt"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -298,12 +298,12 @@ export const DoubtsPanel: React.FC<DoubtsPanelProps> = ({
                   </div>
                 </div>
 
-                <h4 className={`text-xs font-bold ${isResolved ? 'text-slate-500 dark:text-slate-400 line-through' : 'text-slate-900 dark:text-white'}`}>
+                <h4 className={`text-xs font-bold ${isResolved ? 'text-slate-600 dark:text-slate-400 line-through' : 'text-slate-900 dark:text-white'}`}>
                   {doubt.title}
                 </h4>
 
                 {doubt.description && (
-                  <p className="text-xs text-slate-800 dark:text-slate-200 leading-relaxed font-sans">
+                  <p className="text-xs text-slate-900 dark:text-slate-100 leading-relaxed font-sans">
                     {doubt.description}
                   </p>
                 )}
@@ -311,11 +311,11 @@ export const DoubtsPanel: React.FC<DoubtsPanelProps> = ({
                 {/* Resolution Notes Display */}
                 {isResolved && doubt.resolution_notes && (
                   <div className="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-300 dark:border-emerald-500/20 text-xs space-y-1">
-                    <div className="flex items-center gap-1.5 text-[11px] font-mono font-bold text-emerald-900 dark:text-emerald-400">
+                    <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-emerald-900 dark:text-emerald-300">
                       <MessageSquare className="w-3.5 h-3.5" />
                       <span>Resolution:</span>
                     </div>
-                    <p className="text-slate-800 dark:text-slate-200 whitespace-pre-wrap font-sans">{doubt.resolution_notes}</p>
+                    <p className="text-slate-900 dark:text-slate-100 whitespace-pre-wrap font-sans">{doubt.resolution_notes}</p>
                   </div>
                 )}
 
@@ -333,7 +333,7 @@ export const DoubtsPanel: React.FC<DoubtsPanelProps> = ({
                     <div className="flex justify-end gap-1.5">
                       <button
                         onClick={() => setResolvingDoubtId(null)}
-                        className="px-2.5 py-1 text-xs text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                        className="px-2.5 py-1 text-xs text-slate-700 dark:text-slate-300 font-bold hover:text-slate-900 dark:hover:text-white"
                       >
                         Cancel
                       </button>

@@ -214,19 +214,6 @@ ACCESS_TOKEN_EXPIRE_MINUTES=10080
 # YOUTUBE API (Optional: Built-in scraper handles ingestion without key)
 # ==============================================================================
 YOUTUBE_API_KEY=
-
-# ==============================================================================
-# EMAIL SMTP CONFIGURATION (For 6-Digit Signup/Login OTP Delivery)
-# ==============================================================================
-# When left empty, OTP codes are logged directly to the backend terminal for easy dev testing.
-SMTP_HOST=
-SMTP_PORT=587
-SMTP_USER=
-SMTP_PASSWORD=
-SMTP_TLS=True
-SMTP_SSL=False
-EMAILS_FROM_EMAIL=noreply@playnex.com
-EMAILS_FROM_NAME=Playnex Platform
 ```
 
 ---
@@ -237,10 +224,9 @@ PlayNex provides comprehensive REST APIs. Explore and test live with Swagger UI 
 
 | Resource | Method | Endpoint | Description |
 | :--- | :---: | :--- | :--- |
-| **Auth** | `POST` | `/api/auth/send-otp` | Request a 6-digit registration OTP |
-| **Auth** | `POST` | `/api/auth/verify-otp` | Verify OTP and issue JWT access token |
+| **Auth** | `POST` | `/api/auth/register` | Register new account (enforces password criteria) |
 | **Auth** | `POST` | `/api/auth/login` | Email/password sign-in |
-| **Auth** | `POST` | `/api/auth/guest` | Instant guest sandbox session |
+| **Auth** | `POST` | `/api/auth/guest-login` | Instant guest sandbox session |
 | **Auth** | `GET` | `/api/auth/me` | Fetch authenticated user profile |
 | **Playlists** | `POST` | `/api/playlists/import` | Ingest playlist via YouTube URL / ID |
 | **Playlists** | `GET` | `/api/playlists` | List user's imported playlists |
@@ -253,7 +239,7 @@ PlayNex provides comprehensive REST APIs. Explore and test live with Swagger UI 
 | **Doubts** | `GET` | `/api/doubts/` | Get doubts with status filters |
 | **Doubts** | `POST` | `/api/doubts/` | Create a timestamp-linked doubt |
 | **Doubts** | `PATCH`| `/api/doubts/{id}` | Update doubt status (`OPEN` / `RESOLVED`) |
-| **Revisions** | `GET` | `/api/revisions/` | List prioritized revision queue |
+| **Revisions** | `GET` | `/api/revisions/queue` | List prioritized revision queue |
 | **Revisions** | `POST` | `/api/revisions/` | Add/update video revision priority |
 | **Tags** | `GET` | `/api/tags/` | List all custom taxonomy tags |
 | **Tags** | `POST` | `/api/tags/` | Create a custom tag |
@@ -269,7 +255,7 @@ Run backend test suites:
 # Run API endpoint tests
 python backend/test_api.py
 
-# Run end-to-end OTP authentication tests
+# Run end-to-end authentication & password validation tests
 python backend/test_auth_flow.py
 ```
 

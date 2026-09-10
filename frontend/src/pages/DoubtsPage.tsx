@@ -117,17 +117,17 @@ export const DoubtsPage: React.FC = () => {
             <HelpCircle className="w-5 h-5" />
           </div>
           <div>
-            <h1 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">
+            <h1 className="text-xl sm:text-2xl font-black text-slate-950 dark:text-white">
               Doubt Resolution Hub
             </h1>
-            <p className="text-xs text-slate-500 dark:text-slate-400 font-mono mt-0.5">
+            <p className="text-xs text-slate-700 dark:text-slate-300 font-mono mt-0.5">
               Timestamp-linked questions logged during course playback
             </p>
           </div>
         </div>
 
         {openCount > 0 && (
-          <span className="text-xs font-mono font-bold text-rose-600 dark:text-rose-300 bg-rose-50 dark:bg-rose-500/15 px-3 py-1.5 rounded-xl border border-rose-200 dark:border-rose-500/30 self-start sm:self-auto">
+          <span className="text-xs font-mono font-bold text-rose-800 dark:text-rose-300 bg-rose-100 dark:bg-rose-500/20 px-3.5 py-1.5 rounded-xl border border-rose-300 dark:border-rose-500/40 self-start sm:self-auto">
             {openCount} Unresolved {openCount === 1 ? 'Doubt' : 'Doubts'}
           </span>
         )}
@@ -145,20 +145,20 @@ export const DoubtsPage: React.FC = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search doubts by title, question, or course..."
-            className="w-full pl-10 pr-4 py-2 bg-white dark:bg-[#0c1426] border border-slate-200 dark:border-white/[0.08] rounded-xl text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-cyan-500 shadow-sm"
+            className="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-[#0c1426] border border-slate-300 dark:border-white/[0.12] rounded-xl text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-cyan-500 shadow-sm"
           />
         </div>
 
         {/* Status Filter Tabs */}
-        <div className="flex items-center bg-slate-100 dark:bg-[#0c1426] p-1 rounded-xl border border-slate-200 dark:border-white/[0.08] font-mono text-xs">
+        <div className="flex items-center bg-slate-100 dark:bg-[#0c1426] p-1 rounded-xl border border-slate-300 dark:border-white/[0.12] font-mono text-xs">
           {(['OPEN', 'RESOLVED', 'ALL'] as const).map((tab) => (
             <button
               key={tab}
               onClick={() => setStatusFilter(tab)}
               className={`px-3 py-1.5 rounded-lg font-bold transition-all ${
                 statusFilter === tab
-                  ? 'bg-white dark:bg-slate-800 text-cyan-600 dark:text-[#00e5ff] shadow-sm'
-                  : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                  ? 'bg-white dark:bg-slate-800 text-cyan-800 dark:text-[#00e5ff] shadow-sm'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
               {tab === 'OPEN' ? 'Open' : tab === 'RESOLVED' ? 'Resolved' : 'All'}
@@ -170,7 +170,7 @@ export const DoubtsPage: React.FC = () => {
         <select
           value={selectedPlaylistId || ''}
           onChange={(e) => setSelectedPlaylistId(e.target.value ? Number(e.target.value) : null)}
-          className="px-3.5 py-2 bg-white dark:bg-[#0c1426] border border-slate-200 dark:border-white/[0.08] rounded-xl text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-cyan-500 font-mono shadow-sm"
+          className="px-3.5 py-2.5 bg-white dark:bg-[#0c1426] border border-slate-300 dark:border-white/[0.12] rounded-xl text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-cyan-500 font-mono font-semibold shadow-sm"
         >
           <option value="">All Courses ({playlists.length})</option>
           {playlists.map((p) => (
@@ -185,15 +185,15 @@ export const DoubtsPage: React.FC = () => {
       {isLoading ? (
         <div className="py-20 text-center">
           <div className="w-8 h-8 rounded-full border-2 border-rose-500 border-t-transparent animate-spin mx-auto mb-2" />
-          <p className="text-xs font-mono text-slate-500 dark:text-slate-400">Loading doubts...</p>
+          <p className="text-xs font-mono font-bold text-slate-700 dark:text-slate-300">Loading doubts...</p>
         </div>
       ) : filteredDoubts.length === 0 ? (
-        <div className="py-16 text-center rounded-2xl border border-dashed border-slate-300 dark:border-white/10 bg-white/60 dark:bg-[#0c1426]/50 p-8 space-y-2">
-          <HelpCircle className="w-10 h-10 text-slate-400 dark:text-slate-600 mx-auto" />
+        <div className="py-16 text-center rounded-2xl border-2 border-dashed border-slate-300 dark:border-white/10 bg-white/60 dark:bg-[#0c1426]/50 p-8 space-y-2">
+          <HelpCircle className="w-10 h-10 text-slate-400 dark:text-slate-500 mx-auto" />
           <h3 className="text-sm font-bold text-slate-900 dark:text-white">
             {statusFilter === 'OPEN' ? 'No open doubts' : 'No doubts found'}
           </h3>
-          <p className="text-xs text-slate-500 dark:text-slate-400 max-w-sm mx-auto">
+          <p className="text-xs text-slate-600 dark:text-slate-300 max-w-sm mx-auto font-medium">
             {statusFilter === 'OPEN'
               ? 'Great job! You have cleared all doubts in your learning path.'
               : 'Log doubts while watching videos to review them later.'}
@@ -208,22 +208,22 @@ export const DoubtsPage: React.FC = () => {
             return (
               <div
                 key={doubt.id}
-                className={`p-5 rounded-2xl border transition-all shadow-sm ${
+                className={`p-5 rounded-2xl border-2 transition-all shadow-sm ${
                   isResolved
-                    ? 'bg-white/70 dark:bg-[#0c1426]/60 border-slate-200 dark:border-white/[0.05] opacity-80'
-                    : 'bg-white dark:bg-[#0c1426] border-slate-200 dark:border-white/[0.08] hover:border-rose-500/40'
+                    ? 'bg-white/80 dark:bg-[#0c1426]/70 border-slate-200 dark:border-white/[0.08] opacity-85'
+                    : 'bg-white dark:bg-[#0c1426] border-slate-200 dark:border-white/[0.08] hover:border-rose-500/50'
                 }`}
               >
                 <div className="space-y-3">
                   <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                     <div className="space-y-1.5 min-w-0 flex-1">
                       {/* Tags & Timestamp */}
-                      <div className="flex flex-wrap items-center gap-2 font-mono text-[11px]">
+                      <div className="flex flex-wrap items-center gap-2 font-mono text-xs">
                         <span
-                          className={`px-2 py-0.5 rounded-full font-bold uppercase ${
+                          className={`px-2.5 py-0.5 rounded-full font-bold uppercase ${
                             isResolved
-                              ? 'bg-emerald-50 dark:bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/30'
-                              : 'bg-rose-50 dark:bg-rose-500/15 text-rose-700 dark:text-rose-400 border border-rose-200 dark:border-rose-500/30'
+                              ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-500/30'
+                              : 'bg-rose-100 dark:bg-rose-500/20 text-rose-800 dark:text-rose-300 border border-rose-300 dark:border-rose-500/30'
                           }`}
                         >
                           {doubt.status}
@@ -231,14 +231,14 @@ export const DoubtsPage: React.FC = () => {
 
                         <Link
                           to={`/playlist/${doubt.playlist_id}?videoId=${doubt.video_id}&t=${doubt.timestamp}`}
-                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-100 dark:bg-[#070b14] hover:bg-slate-200 dark:hover:bg-white/[0.06] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-white/10 transition-colors"
+                          className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-[#070b14] hover:bg-slate-200 dark:hover:bg-white/[0.08] text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-white/15 transition-colors font-bold"
                         >
                           <span>@ {doubt.timestamp_formatted || formatSeconds(doubt.timestamp)}</span>
                           <Play className="w-2.5 h-2.5 fill-current ml-0.5" />
                         </Link>
 
                         {doubt.playlist_title && (
-                          <span className="text-slate-500 dark:text-slate-400 truncate max-w-[200px]">
+                          <span className="text-slate-700 dark:text-slate-300 font-bold truncate max-w-[200px]">
                             {doubt.playlist_title}
                           </span>
                         )}
@@ -246,18 +246,18 @@ export const DoubtsPage: React.FC = () => {
 
                       {/* Video Title */}
                       {doubt.video_title && (
-                        <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 truncate">
+                        <p className="text-xs font-bold text-slate-800 dark:text-slate-200 truncate">
                           {doubt.video_title}
                         </p>
                       )}
 
                       {/* Doubt Question */}
-                      <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white">
+                      <h3 className="text-sm sm:text-base font-bold text-slate-950 dark:text-white">
                         {doubt.title}
                       </h3>
 
                       {doubt.description && (
-                        <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed pt-1">
+                        <p className="text-xs text-slate-800 dark:text-slate-200 leading-relaxed pt-1 font-sans">
                           {doubt.description}
                         </p>
                       )}
@@ -269,7 +269,7 @@ export const DoubtsPage: React.FC = () => {
                         onClick={() => handleToggleResolve(doubt)}
                         className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-mono text-xs font-bold transition-all ${
                           isResolved
-                            ? 'bg-slate-100 dark:bg-[#070b14] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-white/10'
+                            ? 'bg-slate-100 dark:bg-[#070b14] text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-300 dark:border-white/15'
                             : 'bg-emerald-500 hover:bg-emerald-400 text-black shadow-sm'
                         }`}
                       >
@@ -279,7 +279,7 @@ export const DoubtsPage: React.FC = () => {
 
                       <button
                         onClick={() => handleDeleteDoubt(doubt.id)}
-                        className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition-colors"
+                        className="p-1.5 rounded-lg text-slate-500 hover:text-rose-600 dark:text-slate-400 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition-colors"
                         title="Delete doubt"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -289,12 +289,12 @@ export const DoubtsPage: React.FC = () => {
 
                   {/* Resolution Notes Box if already resolved */}
                   {isResolved && doubt.resolution_notes && (
-                    <div className="p-3.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-500/20 text-xs space-y-1">
-                      <div className="flex items-center gap-1.5 font-mono font-bold text-emerald-800 dark:text-emerald-400">
+                    <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-300 dark:border-emerald-500/30 text-xs space-y-1">
+                      <div className="flex items-center gap-1.5 font-mono font-bold text-emerald-900 dark:text-emerald-400">
                         <MessageSquare className="w-3.5 h-3.5" />
                         <span>Resolution & Solution:</span>
                       </div>
-                      <p className="text-slate-700 dark:text-slate-300 whitespace-pre-wrap font-sans">
+                      <p className="text-slate-800 dark:text-slate-200 whitespace-pre-wrap font-sans leading-relaxed">
                         {doubt.resolution_notes}
                       </p>
                     </div>
@@ -302,8 +302,8 @@ export const DoubtsPage: React.FC = () => {
 
                   {/* Inline Form to add resolution notes */}
                   {isResolving && (
-                    <div className="p-4 rounded-xl bg-slate-50 dark:bg-[#070b14] border border-cyan-300 dark:border-[#00e5ff]/30 space-y-3 animate-slide-up">
-                      <label className="block text-xs font-mono font-semibold uppercase text-slate-700 dark:text-slate-300">
+                    <div className="p-4 rounded-xl bg-slate-50 dark:bg-[#070b14] border-2 border-cyan-400 dark:border-[#00e5ff]/40 space-y-3 animate-slide-up font-mono">
+                      <label className="block text-xs font-bold uppercase text-slate-800 dark:text-slate-200">
                         Attach Resolution & Solution Notes (Optional)
                       </label>
                       <textarea
@@ -311,13 +311,13 @@ export const DoubtsPage: React.FC = () => {
                         onChange={(e) => setResolutionNotes(e.target.value)}
                         placeholder="Explain the solution or paste code so you remember how this was solved..."
                         rows={3}
-                        className="w-full px-3 py-2 bg-white dark:bg-[#0c1426] border border-slate-300 dark:border-white/10 rounded-lg text-xs text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-cyan-500"
+                        className="w-full px-3 py-2 bg-white dark:bg-[#0c1426] border-2 border-slate-300 dark:border-white/15 rounded-lg text-xs text-slate-950 dark:text-white focus:outline-none focus:ring-1 focus:ring-cyan-500 font-sans leading-relaxed"
                         autoFocus
                       />
                       <div className="flex justify-end gap-2">
                         <button
                           onClick={() => setResolvingDoubtId(null)}
-                          className="px-3 py-1.5 text-xs font-mono text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                          className="px-3 py-1.5 text-xs font-mono font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                         >
                           Cancel
                         </button>
@@ -332,10 +332,10 @@ export const DoubtsPage: React.FC = () => {
                   )}
 
                   {/* Timestamp Footer */}
-                  <div className="pt-2 border-t border-slate-100 dark:border-white/[0.06] flex items-center justify-between text-[11px] font-mono text-slate-400 dark:text-slate-500">
+                  <div className="pt-2 border-t border-slate-200 dark:border-white/[0.08] flex items-center justify-between text-xs font-mono text-slate-600 dark:text-slate-400">
                     <span>Logged {formatRelativeDate(doubt.created_at)}</span>
                     {doubt.resolved_at && (
-                      <span className="text-emerald-600 dark:text-emerald-400 font-semibold">
+                      <span className="text-emerald-700 dark:text-emerald-400 font-bold">
                         Resolved {formatRelativeDate(doubt.resolved_at)}
                       </span>
                     )}

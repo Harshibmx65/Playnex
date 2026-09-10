@@ -113,9 +113,9 @@ export const DashboardPage: React.FC = () => {
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5">
         {/* Playlists */}
         <div className="p-4 rounded-2xl bg-white dark:bg-[#0c1426] border-2 border-slate-300 dark:border-white/[0.08] flex flex-col justify-between shadow-sm dark:shadow-lg hover:border-cyan-500/40 transition-all">
-          <div className="flex items-center justify-between text-slate-700 dark:text-slate-300 mb-2">
+          <div className="flex items-center justify-between text-slate-800 dark:text-slate-200 mb-2">
             <span className="text-[11px] font-mono font-bold uppercase tracking-wider">Courses</span>
-            <div className="p-1.5 rounded-lg bg-cyan-100 dark:bg-cyan-500/10 text-cyan-800 dark:text-[#00e5ff]">
+            <div className="p-1.5 rounded-lg bg-cyan-100 dark:bg-cyan-500/10 text-cyan-900 dark:text-[#00e5ff]">
               <ListVideo className="w-4 h-4" />
             </div>
           </div>
@@ -123,15 +123,15 @@ export const DashboardPage: React.FC = () => {
             <div className="text-2xl sm:text-3xl font-mono font-black text-slate-900 dark:text-white">
               {stats?.total_playlists || 0}
             </div>
-            <span className="text-[11px] font-mono text-slate-600 dark:text-slate-400 mt-1 block font-medium">Active Playlists</span>
+            <span className="text-xs font-mono text-slate-700 dark:text-slate-300 mt-1 block font-semibold">Active Playlists</span>
           </div>
         </div>
 
         {/* Completed */}
         <div className="p-4 rounded-2xl bg-white dark:bg-[#0c1426] border-2 border-slate-300 dark:border-white/[0.08] flex flex-col justify-between shadow-sm dark:shadow-lg hover:border-emerald-500/40 transition-all">
-          <div className="flex items-center justify-between text-slate-700 dark:text-slate-300 mb-2">
+          <div className="flex items-center justify-between text-slate-800 dark:text-slate-200 mb-2">
             <span className="text-[11px] font-mono font-bold uppercase tracking-wider">Completed</span>
-            <div className="p-1.5 rounded-lg bg-emerald-100 dark:bg-emerald-500/10 text-emerald-800 dark:text-emerald-400">
+            <div className="p-1.5 rounded-lg bg-emerald-100 dark:bg-emerald-500/10 text-emerald-900 dark:text-emerald-400">
               <CheckCircle2 className="w-4 h-4" />
             </div>
           </div>
@@ -139,15 +139,15 @@ export const DashboardPage: React.FC = () => {
             <div className="text-2xl sm:text-3xl font-mono font-black text-emerald-700 dark:text-emerald-400">
               {stats?.completed_videos || 0}
             </div>
-            <span className="text-[11px] font-mono text-slate-600 dark:text-slate-400 mt-1 block font-medium">Videos Mastered</span>
+            <span className="text-xs font-mono text-slate-700 dark:text-slate-300 mt-1 block font-semibold">Videos Mastered</span>
           </div>
         </div>
 
         {/* In Progress */}
         <div className="p-4 rounded-2xl bg-white dark:bg-[#0c1426] border-2 border-slate-300 dark:border-white/[0.08] flex flex-col justify-between shadow-sm dark:shadow-lg hover:border-cyan-500/40 transition-all">
-          <div className="flex items-center justify-between text-slate-700 dark:text-slate-300 mb-2">
+          <div className="flex items-center justify-between text-slate-800 dark:text-slate-200 mb-2">
             <span className="text-[11px] font-mono font-bold uppercase tracking-wider">In Progress</span>
-            <div className="p-1.5 rounded-lg bg-cyan-100 dark:bg-cyan-500/10 text-cyan-800 dark:text-[#00e5ff]">
+            <div className="p-1.5 rounded-lg bg-cyan-100 dark:bg-cyan-500/10 text-cyan-900 dark:text-[#00e5ff]">
               <Clock className="w-4 h-4" />
             </div>
           </div>
@@ -155,15 +155,15 @@ export const DashboardPage: React.FC = () => {
             <div className="text-2xl sm:text-3xl font-mono font-black text-cyan-800 dark:text-[#00e5ff]">
               {stats?.in_progress_videos || 0}
             </div>
-            <span className="text-[11px] font-mono text-slate-600 dark:text-slate-400 mt-1 block font-medium">Ongoing Lessons</span>
+            <span className="text-xs font-mono text-slate-700 dark:text-slate-300 mt-1 block font-semibold">Ongoing Lessons</span>
           </div>
         </div>
 
         {/* Doubts */}
         <div className="p-4 rounded-2xl bg-white dark:bg-[#0c1426] border-2 border-slate-300 dark:border-white/[0.08] flex flex-col justify-between shadow-sm dark:shadow-lg hover:border-rose-500/40 transition-all">
-          <div className="flex items-center justify-between text-slate-700 dark:text-slate-300 mb-2">
+          <div className="flex items-center justify-between text-slate-800 dark:text-slate-200 mb-2">
             <span className="text-[11px] font-mono font-bold uppercase tracking-wider">Doubts</span>
-            <div className="p-1.5 rounded-lg bg-rose-100 dark:bg-rose-500/10 text-rose-800 dark:text-rose-400">
+            <div className="p-1.5 rounded-lg bg-rose-100 dark:bg-rose-500/10 text-rose-900 dark:text-rose-400">
               <HelpCircle className="w-4 h-4" />
             </div>
           </div>
@@ -171,15 +171,15 @@ export const DashboardPage: React.FC = () => {
             <div className="text-2xl sm:text-3xl font-mono font-black text-rose-700 dark:text-rose-400">
               {stats?.open_doubts_count || 0}
             </div>
-            <span className="text-[11px] font-mono text-slate-600 dark:text-slate-400 mt-1 block font-medium">Open Questions</span>
+            <span className="text-xs font-mono text-slate-700 dark:text-slate-300 mt-1 block font-semibold">Open Questions</span>
           </div>
         </div>
 
         {/* Revision Queue */}
         <div className="p-4 rounded-2xl bg-white dark:bg-[#0c1426] border-2 border-slate-300 dark:border-white/[0.08] flex flex-col justify-between shadow-sm dark:shadow-lg hover:border-amber-500/40 transition-all col-span-2 sm:col-span-1">
-          <div className="flex items-center justify-between text-slate-700 dark:text-slate-300 mb-2">
+          <div className="flex items-center justify-between text-slate-800 dark:text-slate-200 mb-2">
             <span className="text-[11px] font-mono font-bold uppercase tracking-wider">Revision</span>
-            <div className="p-1.5 rounded-lg bg-amber-100 dark:bg-amber-500/10 text-amber-800 dark:text-amber-400">
+            <div className="p-1.5 rounded-lg bg-amber-100 dark:bg-amber-500/10 text-amber-900 dark:text-amber-400">
               <RotateCw className="w-4 h-4" />
             </div>
           </div>
@@ -187,7 +187,7 @@ export const DashboardPage: React.FC = () => {
             <div className="text-2xl sm:text-3xl font-mono font-black text-amber-700 dark:text-amber-400">
               {stats?.need_revision_count || 0}
             </div>
-            <span className="text-[11px] font-mono text-slate-600 dark:text-slate-400 mt-1 block font-medium">Pending Drills</span>
+            <span className="text-xs font-mono text-slate-700 dark:text-slate-300 mt-1 block font-semibold">Pending Drills</span>
           </div>
         </div>
       </div>
@@ -198,17 +198,17 @@ export const DashboardPage: React.FC = () => {
           <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div className="space-y-2 max-w-2xl">
               <div className="flex items-center gap-2">
-                <span className="px-2.5 py-0.5 rounded-full font-mono text-[10px] font-bold uppercase bg-cyan-100 dark:bg-[#00e5ff]/15 text-cyan-900 dark:text-[#00e5ff] border border-cyan-300 dark:border-[#00e5ff]/30">
+                <span className="px-2.5 py-0.5 rounded-full font-mono text-xs font-bold uppercase bg-cyan-100 dark:bg-[#00e5ff]/15 text-cyan-950 dark:text-[#00e5ff] border border-cyan-300 dark:border-[#00e5ff]/30">
                   Continue Watching
                 </span>
-                <span className="text-xs font-mono text-slate-600 dark:text-slate-400 font-semibold truncate">
+                <span className="text-xs font-mono text-slate-800 dark:text-slate-200 font-bold truncate">
                   {continueItem.playlist_title}
                 </span>
               </div>
               <h2 className="text-lg sm:text-2xl font-black text-slate-900 dark:text-white line-clamp-2">
                 {continueItem.video_title}
               </h2>
-              <div className="flex items-center gap-4 text-xs font-mono text-slate-600 dark:text-slate-400 pt-1">
+              <div className="flex items-center gap-4 text-xs font-mono text-slate-700 dark:text-slate-300 pt-1 font-semibold">
                 <span>Last position: {formatSeconds(continueItem.last_position)}</span>
                 <span>•</span>
                 <span className="text-cyan-700 dark:text-[#00e5ff] font-bold">{Math.round(continueItem.watch_percentage)}% Completed</span>
@@ -244,7 +244,7 @@ export const DashboardPage: React.FC = () => {
           <div className="py-16 text-center rounded-3xl border-2 border-dashed border-slate-300 dark:border-white/10 bg-white/70 dark:bg-[#0c1426]/50 p-8 space-y-3">
             <ListVideo className="w-12 h-12 text-slate-400 dark:text-slate-600 mx-auto" />
             <h3 className="text-base font-bold text-slate-900 dark:text-white">No courses imported yet</h3>
-            <p className="text-xs text-slate-600 dark:text-slate-400 max-w-sm mx-auto">
+            <p className="text-xs text-slate-700 dark:text-slate-300 font-medium max-w-sm mx-auto">
               Paste any public YouTube playlist URL to convert it into an interactive distraction-free learning course.
             </p>
             <button
